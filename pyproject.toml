@@ -26,22 +26,18 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
 dependencies = [
-  "transpiler-mate-api @ git+https://github.com/sim13pods/transpiler-mate-api.git@main",
+  "transpiler-mate-api==1.0.0",
   "Jinja2==3.1.6",
   "loguru==0.7.3"
 ]
-
-# TODO remove me as soon as transpiler-mate-api is on PyPI
-[tool.hatch.metadata]
-allow-direct-references = true
 
 [project.entry-points."transpiler_mate.plugins"]
 cwl2click = "cwl2click.plugin:cwl2click"
 
 [project.urls]
-Documentation = "https://terradue.github.io/cwl2click/"
-Issues = "https://github.com/Terradue/cwl2click/issues"
-Source = "https://github.com/Terradue/cwl2click"
+Documentation = "https://Transpiler-Mate.github.io/cwl2click/"
+Issues = "https://github.com/Transpiler-Mate/cwl2click/issues"
+Source = "https://github.com/Transpiler-Mate/cwl2click"
 
 [tool.hatch.version]
 path = "src/cwl2click/__about__.py"
