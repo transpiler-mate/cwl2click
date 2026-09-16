@@ -13,14 +13,14 @@
 # limitations under the License.
 
 site_name: CWL2Click
-site_url: https://eoepca.github.io/cwl2click/
+site_url: https://Transpiler-Mate.github.io/cwl2click/
 site_author: Fabrice Brito, Simone Tripodi
-repo_url: https://github.com/Terradue/cwl2click/
-repo_name: Terradue/cwl2click
+repo_url: https://github.com/Transpiler-Mate/cwl2click/
+repo_name: Transpiler-Mate/cwl2click
 
 theme:
   logo: imgs/icon-eoap.png
-  name: material
+  name: readthedocs
 
   palette:
   - media: "(prefers-color-scheme: light)"
@@ -36,12 +36,12 @@ theme:
 
 plugins:
   - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]
   - mermaid2:
       version: 11.4.1
-  - mkdocs-jupyter:
-      execute: true
-      show_input: True
-      no_input: False
 
 markdown_extensions:
   - pymdownx.details
@@ -78,5 +78,7 @@ nav:
   - execution.md
   - adopters.md
   - crosswalk.md
+  - plugin.md
+  - APIs: api.md
 
 copyright: <a href="https://www.apache.org/licenses/LICENSE-2.0"><img src="https://img.shields.io/badge/license-Apache%20License%202.0-blue"" alt="Apache License, Version 2.0" /></a>

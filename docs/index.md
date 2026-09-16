@@ -10,8 +10,14 @@ Defining the Interface(s) first in the CWL not only speeds up the development, i
 
 ### Installation
 
-`cwl2click` is published on [Pypi](https://pypi.org/project/cwl2click/), users just have to execute
+`cwl2click` is published on [Pypi](https://pypi.org/project/cwl2click/), users just have to install it wia `pip`
 
-```
-pip install cwl2click
+!!! Release note
+
+    Since release **0.9.0**, `cwl2puml` is a transpiler-mate plugin.
+    The standalone command was removed; use `transpiler-mate cwl2puml`.
+    The Python library remains available.
+
+```console
+pip install transpiler-mate-runtime "cwl2click>=0.9.0"
 ```
