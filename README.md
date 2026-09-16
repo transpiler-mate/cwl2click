@@ -14,8 +14,13 @@ Boostrap a Python CLI using `click` from a CWL `CommandLineTool`(s).
 
 ## Installation
 
+> [!NOTE]
+> Since release **0.9.0**, `cwl2puml` is a transpiler-mate plugin.
+> The standalone command was removed; use `transpiler-mate cwl2puml`.
+> The Python library remains available.
+
 ```console
-pip install cwl2click
+pip install transpiler-mate-runtime "cwl2click>=0.9.0"
 ```
 
 ### Local quality checks
