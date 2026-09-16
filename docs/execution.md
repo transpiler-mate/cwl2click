@@ -2,119 +2,147 @@
 
 Based on a KISS approach:
 
-```
-$ cwl2click --help
-Usage: cwl2click [OPTIONS] WORKFLOW
+```bash
+Usage: transpiler-mate cwl2click [OPTIONS] SOURCE
+
+  Boostrap a Python CLI using click from a CWL CommandLineTool(s).
 
 Options:
-  --workflow-id TEXT  ID(s) of the CommandLineTools
-  --output PATH       Output directory path  [required]
-  --help              Show this message and exit.
+  --oci-hostname TEXT   [env var: OCI_HOSTNAME]
+  --oci-username TEXT   [env var: OCI_USERNAME]
+  --oci-password TEXT   [env var: OCI_PASSWORD]
+  --oauth2-bearer TEXT  [env var: OAUTH2_BEARER]
+  --clt-id TEXT         ID(s) of the CommandLineTools
+  --output PATH         Output directory path  [required]
+  --help                Show this message and exit.
 ```
 
 Users can generate `Click` code by executing:
 
-```
-cwl2click \
---output /path/to/your-project/src/your-module \
-https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/main/cwl-workflow/pattern-12.cwl
+```bash
+$ transpiler-mate cwl2click \
+    --output ./src/test \
+    https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/develop/cwl-workflow/pattern-12.cwl
 ```
 
 and monitor the execution:
 
-```
-2025-12-24 10:55:57.416 | DEBUG    | cwl_loader:load_cwl_from_location:228 - Loading CWL document from https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/main/cwl-workflow/pattern-12.cwl...
-2025-12-24 10:55:57.664 | DEBUG    | cwl_loader:_load_cwl_from_stream:231 - Reading stream from https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/main/cwl-workflow/pattern-12.cwl...
-2025-12-24 10:55:57.689 | DEBUG    | cwl_loader:load_cwl_from_stream:203 - CWL data of type <class 'ruamel.yaml.comments.CommentedMap'> successfully loaded from stream
-2025-12-24 10:55:57.689 | DEBUG    | cwl_loader:load_cwl_from_yaml:143 - No needs to update the Raw CWL document since it targets already the v1.2
-2025-12-24 10:55:57.689 | DEBUG    | cwl_loader:load_cwl_from_yaml:145 - Parsing the raw CWL document to the CWL Utils DOM...
-2025-12-24 10:56:04.305 | DEBUG    | cwl_loader:load_cwl_from_yaml:158 - Raw CWL document successfully parsed to the CWL Utils DOM!
-2025-12-24 10:56:04.305 | DEBUG    | cwl_loader:load_cwl_from_yaml:160 - Dereferencing the steps[].run...
-2025-12-24 10:56:04.305 | DEBUG    | cwl_loader:_on_process:78 - Checking if https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/main/cwl-workflow/pattern-12.cwl#crop must be externally imported...
-2025-12-24 10:56:04.305 | DEBUG    | cwl_loader:_on_process:82 - run_url: https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/main/cwl-workflow/pattern-12.cwl - uri: https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/main/cwl-workflow/pattern-12.cwl
-2025-12-24 10:56:04.305 | DEBUG    | cwl_loader:_on_process:78 - Checking if https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/main/cwl-workflow/pattern-12.cwl#norm_diff must be externally imported...
-2025-12-24 10:56:04.305 | DEBUG    | cwl_loader:_on_process:82 - run_url: https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/main/cwl-workflow/pattern-12.cwl - uri: https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/main/cwl-workflow/pattern-12.cwl
-2025-12-24 10:56:04.305 | DEBUG    | cwl_loader:_on_process:78 - Checking if https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/main/cwl-workflow/pattern-12.cwl#otsu must be externally imported...
-2025-12-24 10:56:04.305 | DEBUG    | cwl_loader:_on_process:82 - run_url: https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/main/cwl-workflow/pattern-12.cwl - uri: https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/main/cwl-workflow/pattern-12.cwl
-2025-12-24 10:56:04.305 | DEBUG    | cwl_loader:load_cwl_from_yaml:167 - steps[].run successfully dereferenced! Dereferencing the FQNs...
-2025-12-24 10:56:04.305 | DEBUG    | cwl_loader:load_cwl_from_yaml:171 - CWL document successfully dereferenced! Now verifying steps[].run integrity...
-2025-12-24 10:56:04.305 | DEBUG    | cwl_loader:load_cwl_from_yaml:175 - All steps[].run link are resolvable! 
-2025-12-24 10:56:04.305 | DEBUG    | cwl_loader:load_cwl_from_yaml:178 - Sorting Process instances by dependencies....
-2025-12-24 10:56:04.305 | DEBUG    | cwl_loader:load_cwl_from_yaml:180 - Sorting process is over.
-2025-12-24 10:56:04.305 | DEBUG    | cwl_loader:_load_cwl_from_stream:240 - Stream from https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/main/cwl-workflow/pattern-12.cwl successfully load!
-2025-12-24 10:56:04.305 | DEBUG    | cwl2click.cli:main:89 - Input CWL Document from https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/main/cwl-workflow/pattern-12.cwl is a $graph:
-2025-12-24 10:56:04.305 | DEBUG    | cwl2click.cli:_add_if_eligible:72 - * Checking 'norm_diff'...
-2025-12-24 10:56:04.305 | DEBUG    | cwl2click.cli:_add_if_eligible:74 -   'norm_diff' is a CommandLineTool instance
-2025-12-24 10:56:04.305 | DEBUG    | cwl2click.cli:_add_if_eligible:83 -   Include list not defined, processing 'norm_diff'
-2025-12-24 10:56:04.305 | DEBUG    | cwl2click.cli:_add_if_eligible:72 - * Checking 'otsu'...
-2025-12-24 10:56:04.305 | DEBUG    | cwl2click.cli:_add_if_eligible:74 -   'otsu' is a CommandLineTool instance
-2025-12-24 10:56:04.305 | DEBUG    | cwl2click.cli:_add_if_eligible:83 -   Include list not defined, processing 'otsu'
-2025-12-24 10:56:04.305 | DEBUG    | cwl2click.cli:_add_if_eligible:72 - * Checking 'crop'...
-2025-12-24 10:56:04.305 | DEBUG    | cwl2click.cli:_add_if_eligible:74 -   'crop' is a CommandLineTool instance
-2025-12-24 10:56:04.305 | DEBUG    | cwl2click.cli:_add_if_eligible:83 -   Include list not defined, processing 'crop'
-2025-12-24 10:56:04.306 | DEBUG    | cwl2click.cli:_add_if_eligible:72 - * Checking 'pattern-12'...
-2025-12-24 10:56:04.306 | WARNING  | cwl2click.cli:_add_if_eligible:86 -   'pattern-12' is not a CommandLineTool instance, discarding
-2025-12-24 10:56:04.306 | INFO     | cwl2click.cli:main:101 - ------------------------------------------------------------------------
-2025-12-24 10:56:04.306 | DEBUG    | cwl2click.cli:main:102 - Processing CommadLineTools ['norm_diff', 'otsu', 'crop']
-2025-12-24 10:56:04.306 | DEBUG    | cwl2click.cli:main:110 - https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/main/cwl-workflow/pattern-12.cwl was parsed from a URL, normalizing...
-2025-12-24 10:56:04.309 | DEBUG    | cwl2click:to_click_type:94 - Converting <cwl_utils.parser.cwl_v1_2.CommandInputArraySchema object at 0x7ce30a43bf40> CWL type to the related Click type...
-2025-12-24 10:56:04.309 | DEBUG    | cwl2click:to_click_type:94 - Converting Directory CWL type to the related Click type...
-2025-12-24 10:56:04.309 | DEBUG    | cwl2click:to_click_type:94 - Converting https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml#URI CWL type to the related Click type...
-2025-12-24 10:56:04.309 | DEBUG    | cwl2click:to_click_type:94 - Converting Directory CWL type to the related Click type...
-2025-12-24 10:56:04.309 | DEBUG    | cwl2click:to_click_type:94 - Converting Directory CWL type to the related Click type...
-2025-12-24 10:56:04.309 | DEBUG    | cwl2click:to_click_type:94 - Converting https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml#URI CWL type to the related Click type...
-2025-12-24 10:56:04.309 | DEBUG    | cwl2click:to_click_type:94 - Converting Directory CWL type to the related Click type...
-2025-12-24 10:56:04.309 | DEBUG    | cwl2click:to_click_type:94 - Converting https://raw.githubusercontent.com/eoap/schemas/main/ogc.yaml#BBox CWL type to the related Click type...
-2025-12-24 10:56:04.309 | DEBUG    | cwl2click:to_click_type:94 - Converting https://raw.githubusercontent.com/eoap/schemas/main/ogc.yaml#BBox CWL type to the related Click type...
-2025-12-24 10:56:04.309 | DEBUG    | cwl2click:to_click_type:94 - Converting string CWL type to the related Click type...
-2025-12-24 10:56:04.309 | DEBUG    | cwl2click:to_click_type:94 - Converting https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml#URI CWL type to the related Click type...
-2025-12-24 10:56:04.310 | SUCCESS  | cwl2click.cli:main:128 - 'https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/main/cwl-workflow/pattern-12.cwl' successfully converted to Click Python application in '/path/to/your-project/src/your-module/pattern-12.py'.
-2025-12-24 10:56:04.310 | INFO     | cwl2click.cli:main:130 - ------------------------------------------------------------------------
-2025-12-24 10:56:04.310 | SUCCESS  | cwl2click.cli:main:131 - BUILD SUCCESS
-2025-12-24 10:56:04.310 | INFO     | cwl2click.cli:main:139 - ------------------------------------------------------------------------
-2025-12-24 10:56:04.310 | INFO     | cwl2click.cli:main:140 - Total time: 6.8937 seconds
-2025-12-24 10:56:04.310 | INFO     | cwl2click.cli:main:141 - Finished at: 2025-12-24T10:56:04.310
+```log
+2026-09-16 12:16:39.840 | INFO     | transpiler_mate.runtime.cli:invoke_plugin:280 - 
+━┏┛┏━┃┏━┃┏━ ┏━┛┏━┃┛┃  ┏━┛┏━┃  ┏┏ ┏━┃━┏┛┏━┛
+ ┃ ┏┏┛┏━┃┃ ┃━━┃┏━┛┃┃  ┏━┛┏┏┛  ┃┃┃┏━┃ ┃ ┏━┛
+ ┛ ┛ ┛┛ ┛┛ ┛━━┛┛  ┛━━┛━━┛┛ ┛  ┛┛┛┛ ┛ ┛ ━━┛
+
+ v1.0.1 by Terradue srl
+ info[at]terradue[dot]com
+
+2026-09-16 12:16:39.840 | INFO     | transpiler_mate.runtime.cli:invoke_plugin:289 - Started at: 2026-09-16T12:16:39.840
+2026-09-16 12:16:39.841 | DEBUG    | transpiler_mate.runtime.context_resolver:_mount_session:68 - Mounting 'http://' scheme to 'HTTPAdapter'...
+2026-09-16 12:16:39.841 | DEBUG    | transpiler_mate.runtime.context_resolver:_mount_session:70 - Scheme 'http://' successfully mount to 'HTTPAdapter'
+2026-09-16 12:16:39.841 | DEBUG    | transpiler_mate.runtime.context_resolver:_mount_session:68 - Mounting 'https://' scheme to 'HTTPAdapter'...
+2026-09-16 12:16:39.841 | DEBUG    | transpiler_mate.runtime.context_resolver:_mount_session:70 - Scheme 'https://' successfully mount to 'HTTPAdapter'
+2026-09-16 12:16:39.841 | DEBUG    | transpiler_mate.runtime.context_resolver:_mount_session:68 - Mounting 'file://' scheme to 'FileAdapter'...
+2026-09-16 12:16:39.841 | DEBUG    | transpiler_mate.runtime.context_resolver:_mount_session:70 - Scheme 'file://' successfully mount to 'FileAdapter'
+2026-09-16 12:16:39.841 | DEBUG    | transpiler_mate.runtime.context_resolver:_mount_session:68 - Mounting 'oci://' scheme to 'OCIAdapter'...
+2026-09-16 12:16:39.841 | DEBUG    | transpiler_mate.runtime.context_resolver:_mount_session:70 - Scheme 'oci://' successfully mount to 'OCIAdapter'
+2026-09-16 12:16:39.841 | DEBUG    | cwl_loader:load_cwl_from_location:368 - Loading CWL document from https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/develop/cwl-workflow/pattern-12.cwl...
+2026-09-16 12:16:40.043 | DEBUG    | cwl_loader:_load_cwl_from_stream:371 - Reading stream from https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/develop/cwl-workflow/pattern-12.cwl...
+2026-09-16 12:16:40.077 | DEBUG    | cwl_loader:load_cwl_from_stream:338 - CWL data of type <class 'ruamel.yaml.comments.CommentedMap'> successfully loaded from stream
+2026-09-16 12:16:40.077 | DEBUG    | cwl_loader:load_cwl_from_yaml:261 - No needs to update the Raw CWL document since it targets already the v1.2
+2026-09-16 12:16:40.077 | DEBUG    | cwl_loader:load_cwl_from_yaml:265 - Parsing the raw CWL document to the CWL Utils DOM...
+2026-09-16 12:16:48.834 | DEBUG    | cwl_loader:load_cwl_from_yaml:274 - Raw CWL document successfully parsed to the CWL Utils DOM!
+2026-09-16 12:16:48.834 | DEBUG    | cwl_loader:load_cwl_from_yaml:276 - Dereferencing the steps[].run...
+2026-09-16 12:16:48.834 | DEBUG    | cwl_loader._dereference:_dereference_step:143 - Checking if https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/develop/cwl-workflow/pattern-12.cwl#crop must be externally imported...
+2026-09-16 12:16:48.834 | DEBUG    | cwl_loader._dereference:_dereference_step:145 - run_url: https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/develop/cwl-workflow/pattern-12.cwl - uri: https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/develop/cwl-workflow/pattern-12.cwl
+2026-09-16 12:16:48.834 | DEBUG    | cwl_loader._dereference:_dereference_step:143 - Checking if https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/develop/cwl-workflow/pattern-12.cwl#norm_diff must be externally imported...
+2026-09-16 12:16:48.834 | DEBUG    | cwl_loader._dereference:_dereference_step:145 - run_url: https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/develop/cwl-workflow/pattern-12.cwl - uri: https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/develop/cwl-workflow/pattern-12.cwl
+2026-09-16 12:16:48.834 | DEBUG    | cwl_loader._dereference:_dereference_step:143 - Checking if https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/develop/cwl-workflow/pattern-12.cwl#otsu must be externally imported...
+2026-09-16 12:16:48.834 | DEBUG    | cwl_loader._dereference:_dereference_step:145 - run_url: https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/develop/cwl-workflow/pattern-12.cwl - uri: https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/develop/cwl-workflow/pattern-12.cwl
+2026-09-16 12:16:48.834 | DEBUG    | cwl_loader:load_cwl_from_yaml:285 - steps[].run successfully dereferenced! Dereferencing the FQNs...
+2026-09-16 12:16:48.834 | DEBUG    | cwl_loader:load_cwl_from_yaml:289 - CWL document successfully dereferenced! Now verifying steps[].run integrity...
+2026-09-16 12:16:48.834 | DEBUG    | cwl_loader:load_cwl_from_yaml:295 - All steps[].run link are resolvable! 
+2026-09-16 12:16:48.834 | DEBUG    | cwl_loader:load_cwl_from_yaml:298 - Sorting Process instances by dependencies....
+2026-09-16 12:16:48.834 | DEBUG    | cwl_loader:load_cwl_from_yaml:300 - Sorting process is over.
+2026-09-16 12:16:48.834 | DEBUG    | cwl_loader:_load_cwl_from_stream:381 - Stream from https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/develop/cwl-workflow/pattern-12.cwl successfully load!
+2026-09-16 12:16:48.848 | DEBUG    | cwl2click:to_click_type:159 - Type <cwl_utils.parser.cwl_v1_2.CommandInputArraySchema object at 0x7250ef1094b0>, represented by key type Directory, mapped to Path(path_type=Path, exists=True, readable=True, resolve_path=True, file_okay=False, dir_okay=True)
+2026-09-16 12:16:48.848 | DEBUG    | cwl2click:is_required:76 - Detected type <cwl_utils.parser.cwl_v1_2.CommandInputArraySchema object at 0x7250ef1094b0> as required: True
+2026-09-16 12:16:48.848 | DEBUG    | cwl2click:to_click_type:159 - Type Directory, represented by key type Directory, mapped to Path(path_type=Path, exists=True, readable=True, resolve_path=True, file_okay=False, dir_okay=True)
+2026-09-16 12:16:48.849 | DEBUG    | cwl2click:is_required:76 - Detected type Directory as required: True
+2026-09-16 12:16:48.849 | DEBUG    | cwl2click:to_click_type:159 - Type https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml#URI, represented by key type https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml#URI, mapped to STRING
+2026-09-16 12:16:48.849 | DEBUG    | cwl2click:is_required:76 - Detected type https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml#URI as required: True
+2026-09-16 12:16:48.849 | DEBUG    | cwl2click:to_click_type:159 - Type Directory, represented by key type Directory, mapped to Path(path_type=Path, exists=True, readable=True, resolve_path=True, file_okay=False, dir_okay=True)
+2026-09-16 12:16:48.849 | DEBUG    | cwl2click:is_required:76 - Detected type Directory as required: True
+2026-09-16 12:16:48.849 | DEBUG    | cwl2click:to_click_type:159 - Type Directory, represented by key type Directory, mapped to Path(path_type=Path, exists=True, readable=True, resolve_path=True, file_okay=False, dir_okay=True)
+2026-09-16 12:16:48.849 | DEBUG    | cwl2click:is_required:76 - Detected type Directory as required: True
+2026-09-16 12:16:48.850 | DEBUG    | cwl2click:to_click_type:159 - Type https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml#URI, represented by key type https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml#URI, mapped to STRING
+2026-09-16 12:16:48.850 | DEBUG    | cwl2click:is_required:76 - Detected type https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml#URI as required: True
+2026-09-16 12:16:48.850 | DEBUG    | cwl2click:to_click_type:159 - Type Directory, represented by key type Directory, mapped to Path(path_type=Path, exists=True, readable=True, resolve_path=True, file_okay=False, dir_okay=True)
+2026-09-16 12:16:48.850 | DEBUG    | cwl2click:is_required:76 - Detected type Directory as required: True
+2026-09-16 12:16:48.850 | DEBUG    | cwl2click:to_click_type:159 - Type https://raw.githubusercontent.com/eoap/schemas/main/ogc.yaml#BBox, represented by key type https://raw.githubusercontent.com/eoap/schemas/main/ogc.yaml#BBox, mapped to STRING
+2026-09-16 12:16:48.850 | DEBUG    | cwl2click:is_required:76 - Detected type https://raw.githubusercontent.com/eoap/schemas/main/ogc.yaml#BBox as required: True
+2026-09-16 12:16:48.850 | DEBUG    | cwl2click:to_click_type:159 - Type https://raw.githubusercontent.com/eoap/schemas/main/ogc.yaml#BBox, represented by key type https://raw.githubusercontent.com/eoap/schemas/main/ogc.yaml#BBox, mapped to STRING
+2026-09-16 12:16:48.850 | DEBUG    | cwl2click:is_required:76 - Detected type https://raw.githubusercontent.com/eoap/schemas/main/ogc.yaml#BBox as required: True
+2026-09-16 12:16:48.850 | DEBUG    | cwl2click:to_click_type:159 - Type string, represented by key type string, mapped to STRING
+2026-09-16 12:16:48.850 | DEBUG    | cwl2click:is_required:76 - Detected type string as required: True
+2026-09-16 12:16:48.850 | DEBUG    | cwl2click:to_click_type:159 - Type https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml#URI, represented by key type https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml#URI, mapped to STRING
+2026-09-16 12:16:48.850 | DEBUG    | cwl2click:is_required:76 - Detected type https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml#URI as required: True
+2026-09-16 12:16:48.850 | SUCCESS  | cwl2click.plugin:cwl2click:73 - 'https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/develop/cwl-workflow/pattern-12.cwl' successfully converted to Click Python application in '/home/stripodi/Downloads/src/test/pattern_12.py'.
+2026-09-16 12:16:48.850 | SUCCESS  | transpiler_mate.runtime.cli:invoke_plugin:326 - ------------------------------------------------------------------------
+2026-09-16 12:16:48.850 | SUCCESS  | transpiler_mate.runtime.cli:invoke_plugin:327 - SUCCESS
+2026-09-16 12:16:48.850 | SUCCESS  | transpiler_mate.runtime.cli:invoke_plugin:328 - ------------------------------------------------------------------------
+2026-09-16 12:16:48.850 | INFO     | transpiler_mate.runtime.cli:invoke_plugin:331 - Total time: 9.0096 seconds
+2026-09-16 12:16:48.850 | INFO     | transpiler_mate.runtime.cli:invoke_plugin:332 - Finished at: 2026-09-16T12:16:48.850
 ```
 
 As reported in the `SUCCESS` logging message, the `Click` application is serialized to the `/path/to/your-project/src/your-module/pattern-12.py` file:
 
 ```pyton
-# File generated by cwl2click v0.30.0
-# timestamp: 2025-12-24T10:56:04.309
+# File generated by cwl2click v0.8.0
+# timestamp: 2026-09-16T12:16:48.848
 
-from norm_diff_impl import execute as norm_diff_command
-from otsu_impl import execute as otsu_command
-from crop_impl import execute as crop_command
+__all__ = []
+
+from test.norm_diff_impl import execute as norm_diff_command
+from test.otsu_impl import execute as otsu_command
+from test.crop_impl import execute as crop_command
 
 from pathlib import Path
 
 import click
 
+
+
+
+
+
+
+# None
+__all__.append("runner")
+# NOTE
+# Do not forget to add the section below in your `pyproject.toml` file
+#  
+# [project.scripts]
+# ndi-cli = "test.norm_diff:runner"
 @click.group()
-def cli() -> None:
+def runner() -> None:
     pass
- 
-cli.add_command(
+
+
+
+runner.add_command(
     click.Command(
         name="ndi-cli",
         callback=norm_diff_command,
-        # CODE OMITTED FOR SIMPLICITY
-    )
-)
- 
-cli.add_command(
-    click.Command(
-        name="otsu-cli",
-        callback=otsu_command,
+        help="""No info provided""",
+        short_help="""No info provided""",
         params=[
             click.Option(
-                ["--input-ndi"],
-                "raster",
+                ["--rasters"],
+                "rasters",
                 type=click.Path(path_type=Path, exists=True, readable=True, resolve_path=True, file_okay=False, dir_okay=True),
-                multiple=False,
+                multiple=True,
                 required=True,
                 is_flag=False,
-                
             ),
             click.Option(
                 ["--item"],
@@ -123,40 +151,117 @@ cli.add_command(
                 multiple=False,
                 required=True,
                 is_flag=False,
-                
             ),
             click.Option(
-                ["None"],
+                ["--collection"],
                 "collection",
                 type=click.STRING,
                 multiple=False,
                 required=True,
                 is_flag=False,
-                
             ),
         ]
     )
 )
- 
-cli.add_command(
+
+
+
+
+
+
+
+
+runner.add_command(
+    click.Command(
+        name="otsu-cli",
+        callback=otsu_command,
+        help="""No info provided""",
+        short_help="""No info provided""",
+        params=[
+            click.Option(
+                ["--input-ndi"],
+                "raster",
+                type=click.Path(path_type=Path, exists=True, readable=True, resolve_path=True, file_okay=False, dir_okay=True),
+                multiple=False,
+                required=True,
+                is_flag=False,
+            ),
+            click.Option(
+                ["--item"],
+                "item",
+                type=click.Path(path_type=Path, exists=True, readable=True, resolve_path=True, file_okay=False, dir_okay=True),
+                multiple=False,
+                required=True,
+                is_flag=False,
+            ),
+            click.Option(
+                ["--collection"],
+                "collection",
+                type=click.STRING,
+                multiple=False,
+                required=True,
+                is_flag=False,
+            ),
+        ]
+    )
+)
+
+
+
+
+
+
+
+
+runner.add_command(
     click.Command(
         name="crop-cli",
         callback=crop_command,
-        # CODE OMITTED FOR SIMPLICITY
+        help="""No info provided""",
+        short_help="""No info provided""",
+        params=[
+            click.Option(
+                ["--input-item"],
+                "item",
+                type=click.Path(path_type=Path, exists=True, readable=True, resolve_path=True, file_okay=False, dir_okay=True),
+                multiple=False,
+                required=True,
+                is_flag=False,
+            ),
+            click.Option(
+                ["--aoi"],
+                "aoi",
+                type=click.STRING,
+                multiple=False,
+                required=True,
+                is_flag=False,
+                help="""Area of interest defined as a bounding box""",
+            ),
+            click.Option(
+                ["--epsg"],
+                "epsg",
+                type=click.STRING,
+                multiple=False,
+                required=True,
+                is_flag=False,
+            ),
+            click.Option(
+                ["--band"],
+                "band",
+                type=click.STRING,
+                multiple=False,
+                required=True,
+                is_flag=False,
+            ),
+            click.Option(
+                ["--collection"],
+                "collection",
+                type=click.STRING,
+                multiple=False,
+                required=True,
+                is_flag=False,
+            ),
+        ]
     )
 )
 ```
-
-#### Include list
-
-By default, `cwl2click` will transpile _all_ the `CommandLineTool` found instances inside the CWL, in case users are interested in just one sub-set, can use the `--workflow-id` option:
-
-```
-cwl2click \
---output /path/to/your-project/src/your-module \
---workflow-id crop \
---workflow-id otsu \
-https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/main/cwl-workflow/pattern-12.cwl
-```
-
-By executing this example, `ndi-cli` won't be generated.

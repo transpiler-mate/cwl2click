@@ -23,6 +23,12 @@ release tags.
 
 ### Security
 
+## [0.9.0] - 2026-09-16
+
+### Changed
+
+- `click` based custom CLI replaced by `transpiler-plugin`.
+
 ## [0.8.0] - 2026-08-24
 
 ### Fixed
@@ -158,13 +164,14 @@ release tags.
 - Apache-2.0 license and notice files.
 - README with the initial project purpose and installation instructions.
 
-[Unreleased]: https://github.com/Terradue/cwl2click/compare/v0.8.0...HEAD
-[0.8.0]: https://github.com/Terradue/cwl2click/compare/v0.7.0...v0.8.0
-[0.7.0]: https://github.com/Terradue/cwl2click/compare/d1a796c...v0.7.0
-[0.6.0]: https://github.com/Terradue/cwl2click/compare/d1a796c...13aedf7
-[0.5.0]: https://github.com/Terradue/cwl2click/compare/f176901...d1a796c
-[0.4.0]: https://github.com/Terradue/cwl2click/compare/0663ebe...f176901
-[0.3.0]: https://github.com/Terradue/cwl2click/compare/a1cfa6c...0663ebe
-[0.2.0]: https://github.com/Terradue/cwl2click/compare/5c960db...a1cfa6c
-[0.1.0]: https://github.com/Terradue/cwl2click/compare/d4a8b09...5c960db
-[0.0.1]: https://github.com/Terradue/cwl2click/commit/d4a8b09
+[Unreleased]: https://github.com/Transpiler-Mate/cwl2click/compare/v0.9.0...HEAD
+[0.9.0]: https://github.com/Transpiler-Mate/cwl2click/compare/v0.8.0...v0.9.0
+[0.8.0]: https://github.com/Transpiler-Mate/cwl2click/compare/v0.7.0...v0.8.0
+[0.7.0]: https://github.com/Transpiler-Mate/cwl2click/compare/d1a796c...v0.7.0
+[0.6.0]: https://github.com/Transpiler-Mate/cwl2click/compare/d1a796c...13aedf7
+[0.5.0]: https://github.com/Transpiler-Mate/cwl2click/compare/f176901...d1a796c
+[0.4.0]: https://github.com/Transpiler-Mate/cwl2click/compare/0663ebe...f176901
+[0.3.0]: https://github.com/Transpiler-Mate/cwl2click/compare/a1cfa6c...0663ebe
+[0.2.0]: https://github.com/Transpiler-Mate/cwl2click/compare/5c960db...a1cfa6c
+[0.1.0]: https://github.com/Transpiler-Mate/cwl2click/compare/d4a8b09...5c960db
+[0.0.1]: https://github.com/Transpiler-Mate/cwl2click/commit/d4a8b09
