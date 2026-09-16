@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Fabrice Brito, Simone Tripodi" /><link rel="canonical" href="https://Transpiler-Mate.github.io/cwl2click/api/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>APIs - CWL2Click</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../assets/_mkdocstrings.css" rel="stylesheet" />
+        <link href="../styles/css/app.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "APIs";
+        var mkdocs_page_input_path = "api.md";
+        var mkdocs_page_url = "/cwl2click/api/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="..">
+          <img src="../imgs/icon-eoap.png" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Introduction</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../execution/">Execution</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../adopters/">Adopters recommendations</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../crosswalk/">Crosswalk</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../plugin/">Using the transpiler-mate plugin</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">APIs</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#cwl2click">cwl2click</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#plugin-registration">Plugin registration</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#cwl2click.plugin.cwl2click">cwl2click</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#options">Options</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#cwl2click.plugin.Cwl2ClickOptions">Cwl2ClickOptions</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">CWL2Click</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">APIs</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/Transpiler-Mate/cwl2click/edit/master/docs/api.md">Edit on Transpiler-Mate/cwl2click</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <!--
+Copyright 2026 Transpiler-Mate
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<h1 id="api-reference">API reference</h1>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="cwl2click"></a>
+    <div class="doc doc-contents first">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div><h2 id="plugin-registration">Plugin registration</h2>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<a id="cwl2click.plugin.cwl2click"></a>
+    <div class="doc doc-contents first">
+
+        <p>Serialize the resolved CWL document to <code>options.output</code>.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src/cwl2click/plugin.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-51"><span class="nd">@transpiler_plugin</span><span class="p">(</span>
+</span><span id="__span-0-52">    <span class="n">name</span><span class="o">=</span><span class="s2">"cwl2click"</span><span class="p">,</span>
+</span><span id="__span-0-53">    <span class="n">description</span><span class="o">=</span><span class="s2">"Boostrap a Python CLI using click from a CWL CommandLineTool(s)."</span><span class="p">,</span>
+</span><span id="__span-0-54">    <span class="n">options_model</span><span class="o">=</span><span class="n">Cwl2ClickOptions</span><span class="p">,</span>
+</span><span id="__span-0-55"><span class="p">)</span>
+</span><span id="__span-0-56"><span class="k">def</span><span class="w"> </span><span class="nf">cwl2click</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">TranspilerContext</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">Cwl2ClickOptions</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-0-57"><span class="w">    </span><span class="sd">"""Serialize the resolved CWL document to ``options.output``."""</span>
+</span><span id="__span-0-58">
+</span><span id="__span-0-59">    <span class="k">try</span><span class="p">:</span>
+</span><span id="__span-0-60">        <span class="n">options</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-0-61">        <span class="n">target</span> <span class="o">=</span> <span class="n">_get_target</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">source</span><span class="p">,</span> <span class="n">options</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+</span><span id="__span-0-62">        <span class="n">module_name</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span><span class="o">.</span><span class="n">name</span>
+</span><span id="__span-0-63">
+</span><span id="__span-0-64">        <span class="k">with</span> <span class="n">target</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">stream</span><span class="p">:</span>
+</span><span id="__span-0-65">            <span class="n">to_click</span><span class="p">(</span>
+</span><span id="__span-0-66">                <span class="n">command_line_tools</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">get_processes_by_type</span><span class="p">(</span>
+</span><span id="__span-0-67">                    <span class="n">CommandLineTool</span><span class="p">,</span> <span class="n">options</span><span class="o">.</span><span class="n">clt_id</span> <span class="k">if</span> <span class="n">options</span><span class="o">.</span><span class="n">clt_id</span> <span class="k">else</span> <span class="kc">None</span>
+</span><span id="__span-0-68">                <span class="p">),</span>
+</span><span id="__span-0-69">                <span class="n">module_name</span><span class="o">=</span><span class="n">module_name</span><span class="p">,</span>
+</span><span id="__span-0-70">                <span class="n">output_stream</span><span class="o">=</span><span class="n">stream</span><span class="p">,</span>
+</span><span id="__span-0-71">            <span class="p">)</span>
+</span><span id="__span-0-72">
+</span><span id="__span-0-73">        <span class="n">logger</span><span class="o">.</span><span class="n">success</span><span class="p">(</span>
+</span><span id="__span-0-74">            <span class="sa">f</span><span class="s2">"'</span><span class="si">{</span><span class="n">context</span><span class="o">.</span><span class="n">source</span><span class="si">}</span><span class="s2">' successfully converted to Click Python application in "</span>
+</span><span id="__span-0-75">            <span class="sa">f</span><span class="s2">"'</span><span class="si">{</span><span class="n">target</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span><span class="si">}</span><span class="s2">'."</span>
+</span><span id="__span-0-76">        <span class="p">)</span>
+</span><span id="__span-0-77">    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+</span><span id="__span-0-78">        <span class="k">raise</span> <span class="n">PluginExecutionError</span><span class="p">(</span>
+</span><span id="__span-0-79">            <span class="sa">f</span><span class="s2">"An unexpected error occurred while generating CommandLineTool(s) found in input </span><span class="si">{</span><span class="n">context</span><span class="o">.</span><span class="n">source</span><span class="si">}</span><span class="s2"> CWL document"</span>
+</span><span id="__span-0-80">        <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">error</span>
+</span></code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div><h2 id="options">Options</h2>
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<a id="cwl2click.plugin.Cwl2ClickOptions"></a>
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
+
+
+
+        <p>Options accepted by the built-in bundle plugin.</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>src/cwl2click/plugin.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-33"><span class="k">class</span><span class="w"> </span><span class="nc">Cwl2ClickOptions</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span id="__span-0-34"><span class="w">    </span><span class="sd">"""Options accepted by the built-in bundle plugin."""</span>
+</span><span id="__span-0-35">
+</span><span id="__span-0-36">    <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">extra</span><span class="o">=</span><span class="s2">"forbid"</span><span class="p">)</span>
+</span><span id="__span-0-37">
+</span><span id="__span-0-38">    <span class="n">clt_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="__span-0-39">        <span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"ID(s) of the CommandLineTools"</span>
+</span><span id="__span-0-40">    <span class="p">)</span>
+</span><span id="__span-0-41">
+</span><span id="__span-0-42">    <span class="n">output</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">"Output directory path"</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../plugin/" class="btn btn-neutral float-left" title="Using the transpiler-mate plugin"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p><a href="https://www.apache.org/licenses/LICENSE-2.0"><img src="https://img.shields.io/badge/license-Apache%20License%202.0-blue"" alt="Apache License, Version 2.0" /></a></p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/Transpiler-Mate/cwl2click/" class="fa fa-code-fork" style="color: #fcfcfc"> Transpiler-Mate/cwl2click</a>
+        </span>
+    
+    
+      <span><a href="../plugin/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../javascripts/config.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

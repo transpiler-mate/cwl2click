@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Fabrice Brito, Simone Tripodi" /><link rel="canonical" href="https://Transpiler-Mate.github.io/cwl2click/plugin/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Using the transpiler-mate plugin - CWL2Click</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../assets/_mkdocstrings.css" rel="stylesheet" />
+        <link href="../styles/css/app.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Using the transpiler-mate plugin";
+        var mkdocs_page_input_path = "plugin.md";
+        var mkdocs_page_url = "/cwl2click/plugin/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="..">
+          <img src="../imgs/icon-eoap.png" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Introduction</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../execution/">Execution</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../adopters/">Adopters recommendations</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../crosswalk/">Crosswalk</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Using the transpiler-mate plugin</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#convert-a-cwl-document">Convert a CWL document</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#options">Options</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#generated-output">Generated output</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#command-structure-and-application-setup">Command structure and application setup</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#migrating-from-the-former-cli">Migrating from the former CLI</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#plugin-registration">Plugin registration</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../api/">APIs</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">CWL2Click</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Using the transpiler-mate plugin</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/Transpiler-Mate/cwl2click/edit/master/docs/plugin.md">Edit on Transpiler-Mate/cwl2click</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="using-the-transpiler-mate-plugin">Using the transpiler-mate plugin</h1>
+<div class="admonition note">
+<p class="admonition-title">Available since cwl2click 0.9.0</p>
+<p>Since <strong>0.9.0</strong>, command-line conversion is provided by
+<code>transpiler-mate cwl2click</code>. The standalone <code>cwl2click</code> command was removed.
+The Python library remains available independently of the runtime.</p>
+</div>
+<p>The plugin bootstraps a Python CLI using Click from CWL <code>CommandLineTool</code>
+definitions. It generates command definitions and input options, with imports
+for callback functions that you implement separately. It does not execute the
+CWL tools or generate their processing logic.</p>
+<h2 id="installation">Installation</h2>
+<p>Install the runtime and plugin in the same Python environment (Python 3.10 or
+later):</p>
+<div class="highlight"><pre><span></span><code><span id="__span-0-1">pip<span class="w"> </span>install<span class="w"> </span>transpiler-mate-runtime<span class="w"> </span><span class="s2">"cwl2click&gt;=0.9.0"</span>
+</span></code></pre></div>
+<p>The plugin depends on <code>transpiler-mate-api</code>. The separate
+<code>transpiler-mate-runtime</code> package provides the command and discovers installed
+plugins automatically.</p>
+<div class="highlight"><pre><span></span><code><span id="__span-1-1">transpiler-mate<span class="w"> </span>--help
+</span><span id="__span-1-2">transpiler-mate<span class="w"> </span>cwl2click<span class="w"> </span>--help
+</span></code></pre></div>
+<p>Your generated application also needs <code>click</code> as a dependency.</p>
+<h2 id="convert-a-cwl-document">Convert a CWL document</h2>
+<p>Generate a Python module from all CommandLineTools available in the resolved
+document:</p>
+<div class="highlight"><pre><span></span><code><span id="__span-2-1">transpiler-mate<span class="w"> </span>cwl2click<span class="w"> </span>--output<span class="w"> </span>./src/my_app<span class="w"> </span>application.cwl
+</span></code></pre></div>
+<p>Select specific tools by repeating <code>--clt-id</code>:</p>
+<div class="highlight"><pre><span></span><code><span id="__span-3-1">transpiler-mate<span class="w"> </span>cwl2click<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-3-2"><span class="w">  </span>--clt-id<span class="w"> </span>crop<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-3-3"><span class="w">  </span>--clt-id<span class="w"> </span>norm_diff<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-3-4"><span class="w">  </span>--output<span class="w"> </span>./src/my_app<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-3-5"><span class="w">  </span>application.cwl
+</span></code></pre></div>
+<p>Use the tool IDs in the resolved document. The runtime loads the source and
+supplies the context; the plugin requests <code>CommandLineTool</code> processes, optionally
+filtered by these IDs. Workflows themselves are not converted into commands.</p>
+<h2 id="options">Options</h2>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--clt-id TEXT</code></td>
+<td>All CommandLineTools</td>
+<td>Repeat to select multiple tool IDs.</td>
+</tr>
+<tr>
+<td><code>--output PATH</code></td>
+<td>Required; no default</td>
+<td>Directory in which to write the generated Python module.</td>
+</tr>
+</tbody>
+</table>
+<p>Source loading and application metadata validation are handled by the runtime.
+See <code>transpiler-mate cwl2click --help</code> for shared authentication options and
+<a href="../execution/">Execution</a> for a remote-source example.</p>
+<h2 id="generated-output">Generated output</h2>
+<p>The plugin writes one Python file directly into the output directory, containing
+all selected tools. The filename comes from the source URL or path's filename,
+with its extension replaced by <code>.py</code> and its stem converted to snake case.
+For example, <code>pattern-12.cwl</code> produces:</p>
+<div class="highlight"><pre><span></span><code><span id="__span-4-1">src/
+</span><span id="__span-4-2">└── my_app/
+</span><span id="__span-4-3">    └── pattern_12.py
+</span></code></pre></div>
+<p>Missing directories are created. An existing file with the same name is
+overwritten, and other files are retained. Generation errors are reported as
+<code>PluginExecutionError</code>; because the target is opened before rendering, a failure
+can leave an empty or incomplete output file.</p>
+<p>The generated module uses the output directory's final name (<code>my_app</code> above) as
+the package name in callback imports. Choose an output directory whose name is
+a valid Python package name and make that package importable in your application.</p>
+<p>For a tool with ID <code>crop</code>, the generated import is:</p>
+<div class="highlight"><pre><span></span><code><span id="__span-5-1"><span class="kn">from</span><span class="w"> </span><span class="nn">my_app.crop_impl</span><span class="w"> </span><span class="kn">import</span> <span class="n">execute</span> <span class="k">as</span> <span class="n">crop_command</span>
+</span></code></pre></div>
+<p>Create <code>my_app/crop_impl.py</code> yourself and provide an <code>execute</code> function accepting
+the generated input names as keyword arguments. Tool IDs and callback parameter
+names are converted to snake case. The plugin does not create implementation
+modules, <code>__init__.py</code>, or project packaging files.</p>
+<h2 id="command-structure-and-application-setup">Command structure and application setup</h2>
+<p>Each selected tool must define <code>baseCommand</code>. Its first item (or the whole value
+when it is a string) determines the generated command or group variable, converted
+to snake case. A second <code>baseCommand</code> item supplies a subcommand name; otherwise,
+the first <code>arguments</code> item is used when present. Tools with subcommands and the
+same base command share a Click group.</p>
+<p>Inputs become Click options using <code>inputBinding.prefix</code>, or <code>--&lt;input-id&gt;</code> when
+no prefix is supplied. CWL types determine the Click types, required status,
+repeatable options, and boolean flags. Tool labels and documentation supply help
+text. See the <a href="../crosswalk/">crosswalk</a> for mapping details.</p>
+<p>To expose the generated CLI, add a script entry point to your application's
+<code>pyproject.toml</code>. For example, if <code>application.cwl</code> defines a tool with
+<code>baseCommand: runner</code> and you generated <code>src/my_app/application.py</code>, use:</p>
+<div class="highlight"><pre><span></span><code><span id="__span-6-1"><span class="k">[project.scripts]</span>
+</span><span id="__span-6-2"><span class="n">my-cli</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"my_app.application:runner"</span>
+</span></code></pre></div>
+<p>Use the actual generated module filename and command or group variable in this
+entry point. The generated comments contain entry-point suggestions based on
+tool IDs, which can differ from the source-based module filename.</p>
+<p>After providing the callback implementations, declaring the <code>click</code> dependency,
+and installing your application, inspect its commands with:</p>
+<div class="highlight"><pre><span></span><code><span id="__span-7-1">my-cli<span class="w"> </span>--help
+</span></code></pre></div>
+<h2 id="migrating-from-the-former-cli">Migrating from the former CLI</h2>
+<p>Install the runtime alongside the plugin and replace <code>cwl2click</code> with
+<code>transpiler-mate cwl2click</code>. Supply the required <code>--output</code> directory and use
+repeated <code>--clt-id</code> options to restrict generation to particular tools.</p>
+<h2 id="plugin-registration">Plugin registration</h2>
+<p>The package declares this entry point:</p>
+<div class="highlight"><pre><span></span><code><span id="__span-8-1"><span class="k">[project.entry-points.</span><span class="s2">"transpiler_mate.plugins"</span><span class="k">]</span>
+</span><span id="__span-8-2"><span class="n">cwl2click</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"cwl2click.plugin:cwl2click"</span>
+</span></code></pre></div>
+<p>The plugin validates options with <code>Cwl2ClickOptions</code> and receives a
+<code>TranspilerContext</code> from the runtime. Unknown option fields are rejected.
+See the <a href="../api/">API reference</a> for the registration and options model, and for
+the <code>to_click</code> function if you want to render to a stream directly.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../crosswalk/" class="btn btn-neutral float-left" title="Crosswalk"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../api/" class="btn btn-neutral float-right" title="APIs">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p><a href="https://www.apache.org/licenses/LICENSE-2.0"><img src="https://img.shields.io/badge/license-Apache%20License%202.0-blue"" alt="Apache License, Version 2.0" /></a></p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/Transpiler-Mate/cwl2click/" class="fa fa-code-fork" style="color: #fcfcfc"> Transpiler-Mate/cwl2click</a>
+        </span>
+    
+    
+      <span><a href="../crosswalk/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../api/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../javascripts/config.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
