@@ -33,7 +33,7 @@ Your generated application also needs `click` as a dependency.
 
 ## Convert a CWL document
 
-Generate a Python module from all CommandLineTools available in the resolved
+Generate a separate CLI for each CommandLineTool available in the resolved
 document:
 
 ```bash
@@ -59,13 +59,32 @@ filtered by these IDs. Workflows themselves are not converted into commands.
 | Option | Default | Description |
 | --- | --- | --- |
 | `--clt-id TEXT` | All CommandLineTools | Repeat to select multiple tool IDs. |
-| `--output PATH` | Required; no default | Directory in which to write the generated Python module. |
+| `--bundle` | Disabled | Generate one module with the existing command/group structure. |
+| `--output PATH` | Required; no default | Root directory for generated output. |
 
 Source loading and application metadata validation are handled by the runtime.
 See `transpiler-mate cwl2click --help` for shared authentication options and
 [Execution](execution.md) for a remote-source example.
 
 ## Generated output
+
+By default, each selected tool is generated as a direct Click command at
+`<output>/<clt.id>/src/<clt.id_in_snake_case>/cli.py`. Any subcommand derived
+from `baseCommand` or `arguments` is omitted; input options belong directly to
+the command. For example, tool `crop-tool` generates
+`<output>/crop-tool/src/crop_tool/cli.py`, imports its callback from
+`crop_tool.crop_tool_impl`, and can use this entry point:
+
+```toml
+[project.scripts]
+crop-tool = "crop_tool.cli:runner"
+```
+
+Here `runner` is the tool's first `baseCommand` item, converted to snake case.
+Provide the callback implementation and packaging files for each project.
+
+With `--bundle`, the plugin preserves the previous behavior described below.
+For example: `transpiler-mate cwl2click --bundle --output ./src/my_app application.cwl`.
 
 The plugin writes one Python file directly into the output directory, containing
 all selected tools. The filename comes from the source URL or path's filename,
@@ -100,7 +119,7 @@ modules, `__init__.py`, or project packaging files.
 
 ## Command structure and application setup
 
-Each selected tool must define `baseCommand`. Its first item (or the whole value
+In bundled mode, each selected tool must define `baseCommand`. Its first item (or the whole value
 when it is a string) determines the generated command or group variable, converted
 to snake case. A second `baseCommand` item supplies a subcommand name; otherwise,
 the first `arguments` item is used when present. Tools with subcommands and the

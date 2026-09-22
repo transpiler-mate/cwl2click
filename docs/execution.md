@@ -12,6 +12,7 @@ Options:
   --oci-username TEXT   [env var: OCI_USERNAME]
   --oci-password TEXT   [env var: OCI_PASSWORD]
   --oauth2-bearer TEXT  [env var: OAUTH2_BEARER]
+  --bundle              Bundle all tools into one module with subcommands
   --clt-id TEXT         ID(s) of the CommandLineTools
   --output PATH         Output directory path  [required]
   --help                Show this message and exit.
@@ -20,7 +21,7 @@ Options:
 Users can generate `Click` code by executing:
 
 ```bash
-$ transpiler-mate cwl2click \
+$ transpiler-mate cwl2click --bundle \
     --output ./src/test \
     https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/develop/cwl-workflow/pattern-12.cwl
 ```

@@ -237,6 +237,7 @@ def to_click(
     command_line_tools: Iterable[Process],
     module_name: str,
     output_stream: TextIO,
+    bundle: bool = True,
 ):
     template = _jinja_environment.get_template("command_line_tools.py")
 
@@ -246,6 +247,7 @@ def to_click(
             timestamp=datetime.fromtimestamp(time.time()).isoformat(
                 timespec="milliseconds"
             ),
+            bundle=bundle,
             module_name=module_name,
             command_line_tools=command_line_tools,
         )

@@ -49,7 +49,7 @@ class CWLClickTestCase:
             sys.path.remove(path)
         self._tmpdir.cleanup()
 
-    def generate_cli(self, cwl_path: str | Path):
+    def create_context(self, cwl_path: str | Path):
         source = Path(cwl_path).resolve()
         loaded_document: Process | list[Process] = load_document_by_uri(
             source.as_uri(), load_all=True
@@ -64,14 +64,16 @@ class CWLClickTestCase:
                 input_.id = input_.id.rsplit("/", maxsplit=1)[-1]
             document[process.id] = process
 
-        context = TranspilerContext(
+        return TranspilerContext(
             source=AnyUrl(source.as_uri()),
             metadata=SoftwareApplication.model_construct(),
             document=document,
             resolver=_UnusedResolver(),
         )
 
-        cwl2click.execute(context, Cwl2ClickOptions(output=self.tmp_path))
+    def generate_cli(self, cwl_path: str | Path):
+        context = self.create_context(cwl_path)
+        cwl2click.execute(context, Cwl2ClickOptions(output=self.tmp_path, bundle=True))
 
         py_files = list(self.tmp_path.glob("*.py"))
         if len(py_files) != 1:
