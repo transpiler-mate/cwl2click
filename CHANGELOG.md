@@ -23,6 +23,14 @@ release tags.
 
 ### Security
 
+## [0.10.0] - 2026-09-22
+
+### Changed
+
+- Implemented `bundle`, defaulting to `false`:
+  - Enabled: preserves the existing bundled generation.
+  - Disabled: generates each tool at `output/${clt.id}/src/${clt.id | to_snake_case}/cli.py` as a direct Click command.
+
 ## [0.9.0] - 2026-09-16
 
 ### Changed
@@ -164,7 +172,8 @@ release tags.
 - Apache-2.0 license and notice files.
 - README with the initial project purpose and installation instructions.
 
-[Unreleased]: https://github.com/Transpiler-Mate/cwl2click/compare/v0.9.0...HEAD
+[Unreleased]: https://github.com/Transpiler-Mate/cwl2click/compare/v0.10.0...HEAD
+[0.10.0]: https://github.com/Transpiler-Mate/cwl2click/compare/v0.9.0...v0.10.0
 [0.9.0]: https://github.com/Transpiler-Mate/cwl2click/compare/v0.8.0...v0.9.0
 [0.8.0]: https://github.com/Transpiler-Mate/cwl2click/compare/v0.7.0...v0.8.0
 [0.7.0]: https://github.com/Transpiler-Mate/cwl2click/compare/d1a796c...v0.7.0
