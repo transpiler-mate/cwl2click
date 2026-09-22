@@ -13,7 +13,7 @@ import click
 
 {% for clt in command_line_tools %}
 {% set base_command=clt | get_base_command | to_snake_case %}
-{% set command_name=clt | get_command_name %}
+{% set command_name=(clt | get_command_name) if bundle else none %}
 
 {% if not base_command in groups %}# {{ groups.append(base_command) }}
 __all__.append("{{base_command}}")
@@ -21,7 +21,9 @@ __all__.append("{{base_command}}")
 # Do not forget to add the section below in your `pyproject.toml` file
 #  
 # [project.scripts]
-# {{command_name}} = "{{module_name}}.{{clt.id | to_snake_case}}:{{base_command}}"
+{% if bundle %}# {{command_name}} = "{{module_name}}.{{clt.id | to_snake_case}}:{{base_command}}"
+{% else %}# {{clt.id}} = "{{module_name}}.cli:{{base_command}}"
+{% endif %}
 {% if command_name %}@click.group()
 def {{base_command}}() -> None:
     pass

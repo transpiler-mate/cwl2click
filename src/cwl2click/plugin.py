@@ -31,7 +31,7 @@ if TYPE_CHECKING:
 
 
 class Cwl2ClickOptions(BaseModel):
-    """Options accepted by the built-in bundle plugin."""
+    """Options accepted by the cwl2click plugin."""
 
     model_config = ConfigDict(extra="forbid")
 
@@ -40,6 +40,9 @@ class Cwl2ClickOptions(BaseModel):
     )
 
     output: Path = Field(description="Output directory path")
+    bundle: bool = Field(
+        default=False, description="Bundle all tools into one module with subcommands"
+    )
 
 
 def _get_target(workflow: AnyUrl, output: Path) -> Path:
@@ -57,23 +60,38 @@ def cwl2click(context: TranspilerContext, options: Cwl2ClickOptions) -> None:
     """Serialize the resolved CWL document to ``options.output``."""
 
     try:
-        options.output.mkdir(parents=True, exist_ok=True)
-        target = _get_target(context.source, options.output)
-        module_name = target.parent.absolute().name
-
-        with target.open("w") as stream:
-            to_click(
-                command_line_tools=context.get_processes_by_type(
-                    CommandLineTool, options.clt_id if options.clt_id else None
-                ),
-                module_name=module_name,
-                output_stream=stream,
+        command_line_tools = list(
+            context.get_processes_by_type(
+                CommandLineTool, options.clt_id if options.clt_id else None
             )
-
-        logger.success(
-            f"'{context.source}' successfully converted to Click Python application in "
-            f"'{target.absolute()}'."
         )
+        if options.bundle:
+            targets = [
+                (_get_target(context.source, options.output), command_line_tools)
+            ]
+        else:
+            targets = [
+                (
+                    options.output / clt.id / "src" / to_snake_case(clt.id) / "cli.py",
+                    [clt],
+                )
+                for clt in command_line_tools
+            ]
+
+        for target, tools in targets:
+            target.parent.mkdir(parents=True, exist_ok=True)
+            with target.open("w") as stream:
+                to_click(
+                    command_line_tools=tools,
+                    module_name=target.parent.absolute().name,
+                    output_stream=stream,
+                    bundle=options.bundle,
+                )
+
+            logger.success(
+                f"'{context.source}' successfully converted to Click Python application in "
+                f"'{target.absolute()}'."
+            )
     except Exception as error:
         raise PluginExecutionError(
             f"An unexpected error occurred while generating CommandLineTool(s) found in input {context.source} CWL document"
