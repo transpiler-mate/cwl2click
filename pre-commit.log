@@ -1,0 +1,420 @@
+mypy (strict type checking)..............................................[41mFailed[m
+[2m- hook id: mypy[m
+[2m- exit code: 1[m
+
+src/cwl2click/__init__.py: [34mnote:(B[m In function (B[m[1m"get_base_command"(B[m:(B[m
+src/cwl2click/__init__.py:97: [1m[31merror:(B[m Returning Any from function declared to
+return (B[m[1m"str"(B[m  (B[m[33m[no-any-return](B[m
+[2;10m                return clt.baseCommand[0](B[m
+[31m                ^~~~~~~~~~~~~~~~~~~~~~~~~(B[m
+src/cwl2click/__init__.py: [34mnote:(B[m In function (B[m[1m"get_command_name"(B[m:(B[m
+src/cwl2click/__init__.py:110: [1m[31merror:(B[m Returning Any from function declared to
+return (B[m[1m"str | None"(B[m  (B[m[33m[no-any-return](B[m
+[2;10m                return clt.baseCommand[1](B[m
+[31m                ^~~~~~~~~~~~~~~~~~~~~~~~~(B[m
+src/cwl2click/__init__.py:114: [1m[31merror:(B[m Returning Any from function declared to
+return (B[m[1m"str | None"(B[m  (B[m[33m[no-any-return](B[m
+[2;10m                    return clt.arguments[0](B[m
+[31m                    ^~~~~~~~~~~~~~~~~~~~~~~(B[m
+src/cwl2click/__init__.py: [34mnote:(B[m At top level:(B[m
+src/cwl2click/__init__.py:150: [1m[31merror:(B[m Unused (B[m[1m"type: ignore"(B[m comment 
+(B[m[33m[unused-ignore](B[m
+[2;10m            key = type_.class_  # type: ignore(B[m
+[31m            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~(B[m
+src/cwl2click/__init__.py: [34mnote:(B[m In function (B[m[1m"to_click_type"(B[m:(B[m
+src/cwl2click/__init__.py:154: [1m[31merror:(B[m Right operand of (B[m[1m"and"(B[m is never evaluated
+ (B[m[33m[unreachable](B[m
+[2;10m        if key and not isinstance(key, str) and hasattr(key, "symbols"):(B[m
+[31m                                                ^~~~~~~~~~~~~~~~~~~~~~~(B[m
+src/cwl2click/__init__.py:155: [1m[31merror:(B[m Statement is unreachable  (B[m[33m[unreachable](B[m
+[2;10m            return f"Choice({[symbol.split('/')[-1] for symbol in key.symb...(B[m
+[2;10m            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~...(B[m
+src/cwl2click/__init__.py: [34mnote:(B[m In function (B[m[1m"to_python_type"(B[m:(B[m
+src/cwl2click/__init__.py:178: [1m[31merror:(B[m Function is missing a type annotation for
+one or more parameters  (B[m[33m[no-untyped-def](B[m
+[2;10m    def to_python_type(type_) -> str:(B[m
+[31m    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~(B[m
+src/cwl2click/__init__.py: [34mnote:(B[m At top level:(B[m
+src/cwl2click/__init__.py:187: [1m[31merror:(B[m Unused (B[m[1m"type: ignore"(B[m comment 
+(B[m[33m[unused-ignore](B[m
+[2;10m            key = type_.class_  # type: ignore(B[m
+[31m            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~(B[m
+src/cwl2click/__init__.py: [34mnote:(B[m In function (B[m[1m"to_click"(B[m:(B[m
+src/cwl2click/__init__.py:236: [1m[31merror:(B[m Function is missing a return type
+annotation  (B[m[33m[no-untyped-def](B[m
+[2;10m    def to_click((B[m
+[31m    ^~~~~~~~~~~~~(B[m
+tests/utils.py: [34mnote:(B[m In member (B[m[1m"setUp"(B[m of class (B[m[1m"CWLClickTestCase"(B[m:(B[m
+tests/utils.py:39: [1m[31merror:(B[m Function is missing a return type annotation 
+(B[m[33m[no-untyped-def](B[m
+[2;10m        def setUp(self):(B[m
+[31m        ^~~~~~~~~~~~~~~~(B[m
+tests/utils.py:39: [34mnote:(B[m Use (B[m[1m"-> None"(B[m if function does not return a value(B[m
+tests/utils.py: [34mnote:(B[m In member (B[m[1m"tearDown"(B[m of class (B[m[1m"CWLClickTestCase"(B[m:(B[m
+tests/utils.py:45: [1m[31merror:(B[m Function is missing a return type annotation 
+(B[m[33m[no-untyped-def](B[m
+[2;10m        def tearDown(self):(B[m
+[31m        ^~~~~~~~~~~~~~~~~~~(B[m
+tests/utils.py:45: [34mnote:(B[m Use (B[m[1m"-> None"(B[m if function does not return a value(B[m
+tests/utils.py: [34mnote:(B[m In member (B[m[1m"create_context"(B[m of class (B[m[1m"CWLClickTestCase"(B[m:(B[m
+tests/utils.py:52: [1m[31merror:(B[m Function is missing a return type annotation 
+(B[m[33m[no-untyped-def](B[m
+[2;10m        def create_context(self, cwl_path: str | Path):(B[m
+[31m        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~(B[m
+tests/utils.py: [34mnote:(B[m In member (B[m[1m"generate_cli"(B[m of class (B[m[1m"CWLClickTestCase"(B[m:(B[m
+tests/utils.py:74: [1m[31merror:(B[m Function is missing a return type annotation 
+(B[m[33m[no-untyped-def](B[m
+[2;10m        def generate_cli(self, cwl_path: str | Path):(B[m
+[31m        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~(B[m
+tests/utils.py: [34mnote:(B[m In member (B[m[1m"_stub_impl_modules"(B[m of class (B[m[1m"CWLClickTestCase"(B[m:(B[m
+tests/utils.py:86: [1m[31merror:(B[m Function is missing a return type annotation 
+(B[m[33m[no-untyped-def](B[m
+[2;10m        def _stub_impl_modules(self, py_file: Path):(B[m
+[31m        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~(B[m
+tests/utils.py: [34mnote:(B[m In member (B[m[1m"_import_cli"(B[m of class (B[m[1m"CWLClickTestCase"(B[m:(B[m
+tests/utils.py:108: [1m[31merror:(B[m Function is missing a return type annotation 
+(B[m[33m[no-untyped-def](B[m
+[2;10m        def _import_cli(self, py_file: Path):(B[m
+[31m        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~(B[m
+tests/test_string_format.py: [34mnote:(B[m In member (B[m[1m"setUp"(B[m of class (B[m[1m"TestStringFormat"(B[m:(B[m
+tests/test_string_format.py:23: [1m[31merror:(B[m Function is missing a return type
+annotation  (B[m[33m[no-untyped-def](B[m
+[2;10m        def setUp(self):(B[m
+[31m        ^~~~~~~~~~~~~~~~(B[m
+tests/test_string_format.py:23: [34mnote:(B[m Use (B[m[1m"-> None"(B[m if function does not return a value(B[m
+tests/test_string_format.py:24: [1m[31merror:(B[m Call to untyped function (B[m[1m"setUp"(B[m in
+typed context  (B[m[33m[no-untyped-call](B[m
+[2;10m            super().setUp()(B[m
+[31m            ^~~~~~~~~~~~~~~(B[m
+tests/test_string_format.py: [34mnote:(B[m In member (B[m[1m"test_uri_inputs"(B[m of class (B[m[1m"TestStringFormat"(B[m:(B[m
+tests/test_string_format.py:27: [1m[31merror:(B[m Function is missing a return type
+annotation  (B[m[33m[no-untyped-def](B[m
+[2;10m        def test_uri_inputs(self):(B[m
+[31m        ^~~~~~~~~~~~~~~~~~~~~~~~~~(B[m
+tests/test_string_format.py:27: [34mnote:(B[m Use (B[m[1m"-> None"(B[m if function does not return a value(B[m
+tests/test_string_format.py: [34mnote:(B[m In member (B[m[1m"test_datetime_inputs"(B[m of class (B[m[1m"TestStringFormat"(B[m:(B[m
+tests/test_string_format.py:38: [1m[31merror:(B[m Function is missing a return type
+annotation  (B[m[33m[no-untyped-def](B[m
+[2;10m        def test_datetime_inputs(self):(B[m
+[31m        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~(B[m
+tests/test_string_format.py:38: [34mnote:(B[m Use (B[m[1m"-> None"(B[m if function does not return a value(B[m
+tests/test_string_format.py: [34mnote:(B[m In member (B[m[1m"test_uuid_inputs"(B[m of class (B[m[1m"TestStringFormat"(B[m:(B[m
+tests/test_string_format.py:50: [1m[31merror:(B[m Function is missing a return type
+annotation  (B[m[33m[no-untyped-def](B[m
+[2;10m        def test_uuid_inputs(self):(B[m
+[31m        ^~~~~~~~~~~~~~~~~~~~~~~~~~~(B[m
+tests/test_string_format.py:50: [34mnote:(B[m Use (B[m[1m"-> None"(B[m if function does not return a value(B[m
+tests/test_input_types.py: [34mnote:(B[m In member (B[m[1m"setUp"(B[m of class (B[m[1m"TestInputTypes"(B[m:(B[m
+tests/test_input_types.py:21: [1m[31merror:(B[m Function is missing a return type
+annotation  (B[m[33m[no-untyped-def](B[m
+[2;10m        def setUp(self):(B[m
+[31m        ^~~~~~~~~~~~~~~~(B[m
+tests/test_input_types.py:21: [34mnote:(B[m Use (B[m[1m"-> None"(B[m if function does not return a value(B[m
+tests/test_input_types.py:22: [1m[31merror:(B[m Call to untyped function (B[m[1m"setUp"(B[m in typed
+context  (B[m[33m[no-untyped-call](B[m
+[2;10m            super().setUp()(B[m
+[31m            ^~~~~~~~~~~~~~~(B[m
+tests/test_input_types.py: [34mnote:(B[m In member (B[m[1m"test_input_types"(B[m of class (B[m[1m"TestInputTypes"(B[m:(B[m
+tests/test_input_types.py:24: [1m[31merror:(B[m Function is missing a return type
+annotation  (B[m[33m[no-untyped-def](B[m
+[2;10m        def test_input_types(self):(B[m
+[31m        ^~~~~~~~~~~~~~~~~~~~~~~~~~~(B[m
+tests/test_input_types.py:24: [34mnote:(B[m Use (B[m[1m"-> None"(B[m if function does not return a value(B[m
+tests/test_input_types.py: [34mnote:(B[m In member (B[m[1m"test_array_input_types"(B[m of class (B[m[1m"TestInputTypes"(B[m:(B[m
+tests/test_input_types.py:63: [1m[31merror:(B[m Function is missing a return type
+annotation  (B[m[33m[no-untyped-def](B[m
+[2;10m        def test_array_input_types(self):(B[m
+[31m        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~(B[m
+tests/test_input_types.py:63: [34mnote:(B[m Use (B[m[1m"-> None"(B[m if function does not return a value(B[m
+tests/test_input_types.py: [34mnote:(B[m In member (B[m[1m"test_optional_input_types"(B[m of class (B[m[1m"TestInputTypes"(B[m:(B[m
+tests/test_input_types.py:96: [1m[31merror:(B[m Function is missing a return type
+annotation  (B[m[33m[no-untyped-def](B[m
+[2;10m        def test_optional_input_types(self):(B[m
+[31m        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~(B[m
+tests/test_input_types.py:96: [34mnote:(B[m Use (B[m[1m"-> None"(B[m if function does not return a value(B[m
+tests/test_implicit_prefix.py: [34mnote:(B[m In member (B[m[1m"setUp"(B[m of class (B[m[1m"TestImplicitPrefix"(B[m:(B[m
+tests/test_implicit_prefix.py:21: [1m[31merror:(B[m Function is missing a return type
+annotation  (B[m[33m[no-untyped-def](B[m
+[2;10m        def setUp(self):(B[m
+[31m        ^~~~~~~~~~~~~~~~(B[m
+tests/test_implicit_prefix.py:21: [34mnote:(B[m Use (B[m[1m"-> None"(B[m if function does not return a value(B[m
+tests/test_implicit_prefix.py:22: [1m[31merror:(B[m Call to untyped function (B[m[1m"setUp"(B[m in
+typed context  (B[m[33m[no-untyped-call](B[m
+[2;10m            super().setUp()(B[m
+[31m            ^~~~~~~~~~~~~~~(B[m
+tests/test_implicit_prefix.py: [34mnote:(B[m In member (B[m[1m"test_directory_inputs"(B[m of class (B[m[1m"TestImplicitPrefix"(B[m:(B[m
+tests/test_implicit_prefix.py:25: [1m[31merror:(B[m Function is missing a return type
+annotation  (B[m[33m[no-untyped-def](B[m
+[2;10m        def test_directory_inputs(self):(B[m
+[31m        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~(B[m
+tests/test_implicit_prefix.py:25: [34mnote:(B[m Use (B[m[1m"-> None"(B[m if function does not return a value(B[m
+tests/test_implicit_prefix.py: [34mnote:(B[m In member (B[m[1m"test_file_inputs"(B[m of class (B[m[1m"TestImplicitPrefix"(B[m:(B[m
+tests/test_implicit_prefix.py:40: [1m[31merror:(B[m Function is missing a return type
+annotation  (B[m[33m[no-untyped-def](B[m
+[2;10m        def test_file_inputs(self):(B[m
+[31m        ^~~~~~~~~~~~~~~~~~~~~~~~~~~(B[m
+tests/test_implicit_prefix.py:40: [34mnote:(B[m Use (B[m[1m"-> None"(B[m if function does not return a value(B[m
+tests/test_file_directory.py: [34mnote:(B[m In member (B[m[1m"setUp"(B[m of class (B[m[1m"TestFileDirectory"(B[m:(B[m
+tests/test_file_directory.py:21: [1m[31merror:(B[m Function is missing a return type
+annotation  (B[m[33m[no-untyped-def](B[m
+[2;10m        def setUp(self):(B[m
+[31m        ^~~~~~~~~~~~~~~~(B[m
+tests/test_file_directory.py:21: [34mnote:(B[m Use (B[m[1m"-> None"(B[m if function does not return a value(B[m
+tests/test_file_directory.py:22: [1m[31merror:(B[m Call to untyped function (B[m[1m"setUp"(B[m in
+typed context  (B[m[33m[no-untyped-call](B[m
+[2;10m            super().setUp()(B[m
+[31m            ^~~~~~~~~~~~~~~(B[m
+tests/test_file_directory.py: [34mnote:(B[m In member (B[m[1m"test_directory_inputs"(B[m of class (B[m[1m"TestFileDirectory"(B[m:(B[m
+tests/test_file_directory.py:25: [1m[31merror:(B[m Function is missing a return type
+annotation  (B[m[33m[no-untyped-def](B[m
+[2;10m        def test_directory_inputs(self):(B[m
+[31m        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~(B[m
+tests/test_file_directory.py:25: [34mnote:(B[m Use (B[m[1m"-> None"(B[m if function does not return a value(B[m
+tests/test_file_directory.py: [34mnote:(B[m In member (B[m[1m"test_file_inputs"(B[m of class (B[m[1m"TestFileDirectory"(B[m:(B[m
+tests/test_file_directory.py:40: [1m[31merror:(B[m Function is missing a return type
+annotation  (B[m[33m[no-untyped-def](B[m
+[2;10m        def test_file_inputs(self):(B[m
+[31m        ^~~~~~~~~~~~~~~~~~~~~~~~~~~(B[m
+tests/test_file_directory.py:40: [34mnote:(B[m Use (B[m[1m"-> None"(B[m if function does not return a value(B[m
+tests/test_doc_label.py: [34mnote:(B[m In member (B[m[1m"setUp"(B[m of class (B[m[1m"TestDocLabel"(B[m:(B[m
+tests/test_doc_label.py:21: [1m[31merror:(B[m Function is missing a return type annotation
+ (B[m[33m[no-untyped-def](B[m
+[2;10m        def setUp(self):(B[m
+[31m        ^~~~~~~~~~~~~~~~(B[m
+tests/test_doc_label.py:21: [34mnote:(B[m Use (B[m[1m"-> None"(B[m if function does not return a value(B[m
+tests/test_doc_label.py:22: [1m[31merror:(B[m Call to untyped function (B[m[1m"setUp"(B[m in typed
+context  (B[m[33m[no-untyped-call](B[m
+[2;10m            super().setUp()(B[m
+[31m            ^~~~~~~~~~~~~~~(B[m
+tests/test_doc_label.py: [34mnote:(B[m In member (B[m[1m"test_label"(B[m of class (B[m[1m"TestDocLabel"(B[m:(B[m
+tests/test_doc_label.py:24: [1m[31merror:(B[m Function is missing a return type annotation
+ (B[m[33m[no-untyped-def](B[m
+[2;10m        def test_label(self):(B[m
+[31m        ^~~~~~~~~~~~~~~~~~~~~(B[m
+tests/test_doc_label.py:24: [34mnote:(B[m Use (B[m[1m"-> None"(B[m if function does not return a value(B[m
+tests/test_doc_label.py: [34mnote:(B[m In member (B[m[1m"test_multiline_doc_is_normalized_for_help"(B[m of class (B[m[1m"TestDocLabel"(B[m:(B[m
+tests/test_doc_label.py:40: [1m[31merror:(B[m Function is missing a return type annotation
+ (B[m[33m[no-untyped-def](B[m
+[2;10m        def test_multiline_doc_is_normalized_for_help(self):(B[m
+[31m        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~(B[m
+tests/test_doc_label.py:40: [34mnote:(B[m Use (B[m[1m"-> None"(B[m if function does not return a value(B[m
+tests/test_doc_label.py: [34mnote:(B[m In member (B[m[1m"test_multiline_doc_preserves_paragraphs_and_uses_triple_quotes"(B[m of class (B[m[1m"TestDocLabel"(B[m:(B[m
+tests/test_doc_label.py:50: [1m[31merror:(B[m Function is missing a return type annotation
+ (B[m[33m[no-untyped-def](B[m
+[2;10m        def test_multiline_doc_preserves_paragraphs_and_uses_triple_quotes...(B[m
+[2;10m        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~...(B[m
+tests/test_doc_label.py:50: [34mnote:(B[m Use (B[m[1m"-> None"(B[m if function does not return a value(B[m
+tests/test_behaviour.py: [34mnote:(B[m In member (B[m[1m"setUp"(B[m of class (B[m[1m"TestBehaviour"(B[m:(B[m
+tests/test_behaviour.py:24: [1m[31merror:(B[m Function is missing a return type annotation
+ (B[m[33m[no-untyped-def](B[m
+[2;10m        def setUp(self):(B[m
+[31m        ^~~~~~~~~~~~~~~~(B[m
+tests/test_behaviour.py:24: [34mnote:(B[m Use (B[m[1m"-> None"(B[m if function does not return a value(B[m
+tests/test_behaviour.py:25: [1m[31merror:(B[m Call to untyped function (B[m[1m"setUp"(B[m in typed
+context  (B[m[33m[no-untyped-call](B[m
+[2;10m            super().setUp()(B[m
+[31m            ^~~~~~~~~~~~~~~(B[m
+tests/test_behaviour.py: [34mnote:(B[m In member (B[m[1m"test_basecommand_argument"(B[m of class (B[m[1m"TestBehaviour"(B[m:(B[m
+tests/test_behaviour.py:27: [1m[31merror:(B[m Function is missing a return type annotation
+ (B[m[33m[no-untyped-def](B[m
+[2;10m        def test_basecommand_argument(self):(B[m
+[31m        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~(B[m
+tests/test_behaviour.py:27: [34mnote:(B[m Use (B[m[1m"-> None"(B[m if function does not return a value(B[m
+tests/test_behaviour.py: [34mnote:(B[m In member (B[m[1m"test_basecommand_argument_help"(B[m of class (B[m[1m"TestBehaviour"(B[m:(B[m
+tests/test_behaviour.py:36: [1m[31merror:(B[m Function is missing a return type annotation
+ (B[m[33m[no-untyped-def](B[m
+[2;10m        def test_basecommand_argument_help(self):(B[m
+[31m        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~(B[m
+tests/test_behaviour.py:36: [34mnote:(B[m Use (B[m[1m"-> None"(B[m if function does not return a value(B[m
+tests/test_behaviour.py: [34mnote:(B[m In member (B[m[1m"test_no_argument"(B[m of class (B[m[1m"TestBehaviour"(B[m:(B[m
+tests/test_behaviour.py:48: [1m[31merror:(B[m Function is missing a return type annotation
+ (B[m[33m[no-untyped-def](B[m
+[2;10m        def test_no_argument(self):(B[m
+[31m        ^~~~~~~~~~~~~~~~~~~~~~~~~~~(B[m
+tests/test_behaviour.py:48: [34mnote:(B[m Use (B[m[1m"-> None"(B[m if function does not return a value(B[m
+tests/test_behaviour.py: [34mnote:(B[m In member (B[m[1m"test_multiple_basecommands"(B[m of class (B[m[1m"TestBehaviour"(B[m:(B[m
+tests/test_behaviour.py:59: [1m[31merror:(B[m Function is missing a return type annotation
+ (B[m[33m[no-untyped-def](B[m
+[2;10m        def test_multiple_basecommands(self):(B[m
+[31m        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~(B[m
+tests/test_behaviour.py:59: [34mnote:(B[m Use (B[m[1m"-> None"(B[m if function does not return a value(B[m
+tests/test_bundle.py: [34mnote:(B[m In member (B[m[1m"test_default_generates_separate_direct_commands"(B[m of class (B[m[1m"TestStandalone"(B[m:(B[m
+tests/test_bundle.py:13: [1m[31merror:(B[m Function is missing a return type annotation 
+(B[m[33m[no-untyped-def](B[m
+[2;10m        def test_default_generates_separate_direct_commands(self):(B[m
+[31m        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~(B[m
+tests/test_bundle.py:13: [34mnote:(B[m Use (B[m[1m"-> None"(B[m if function does not return a value(B[m
+tests/test_bundle.py: [34mnote:(B[m In member (B[m[1m"test_selection_applies_before_standalone_generation"(B[m of class (B[m[1m"TestStandalone"(B[m:(B[m
+tests/test_bundle.py:46: [1m[31merror:(B[m Function is missing a return type annotation 
+(B[m[33m[no-untyped-def](B[m
+[2;10m        def test_selection_applies_before_standalone_generation(self):(B[m
+[31m        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~(B[m
+tests/test_bundle.py:46: [34mnote:(B[m Use (B[m[1m"-> None"(B[m if function does not return a value(B[m
+[1m[31mFound 46 errors in 9 files (checked 12 source files)(B[m
+
+ruff (format)............................................................[41mFailed[m
+[2m- hook id: ruff-format[m
+[2m- exit code: 1[m
+
+[1m[91m]8;;https://docs.astral.sh/ruff/rules/magic-value-comparison\PLR2004]8;;\[0m[1m Magic value used in comparison, consider replacing `2` with a constant variable[0m
+  [1m[94m--> [0msrc/cwl2click/__init__.py:87:31
+   [1m[94m|[0m
+[1m[94m85[0m [1m[94m|[0m     array_size: int = _get_array_size(type_)
+[1m[94m86[0m [1m[94m|[0m
+[1m[94m87[0m [1m[94m|[0m     return not (array_size == 2 and is_nullable(type_))
+   [1m[94m|[0m                               [1m[91m^[0m
+
+[1m[91m]8;;https://docs.astral.sh/ruff/rules/parenthesize-chained-operators\RUF021]8;;\[0m [[1m[96m*[0m][1m Parenthesize `a and b` expressions when chaining `and` and `or` together, to make the precedence clear[0m
+  [1m[94m--> [0msrc/cwl2click/__init__.py:91:12
+   [1m[94m|[0m
+[1m[94m90[0m [1m[94m|[0m def is_flag(type_: Any) -> bool:
+[1m[94m91[0m [1m[94m|[0m     return isinstance(type_, list) and "boolean" in type_ or type_ == "boolean"
+   [1m[94m|[0m            [1m[91m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[1m[96mhelp[0m[1m: Parenthesize the `and` subexpression[0m
+[1m[94m  [0m [1m[94m|[0m
+[1m[94m90[0m [1m[94m|[0m def is_flag(type_: Any) -> bool:
+[1m[94m  [0m [1m[31m-[0m [31m    return [0m[1m[31misinstance(type_,[0m[0m[31m list) and "boolean" in [0m[1m[31mtype_[0m[0m[31m or type_ == "boolean"
+[0m[1m[94m91[0m [1m[32m+[0m [32m    return [0m[1m[32m(isinstance(type_,[0m[0m[32m list) and "boolean" in [0m[1m[32mtype_)[0m[0m[32m or type_ == "boolean"
+[0m[1m[94m92[0m [1m[94m|[0m
+[1m[94m  [0m [1m[94m|[0m
+
+[1m[91m]8;;https://docs.astral.sh/ruff/rules/unnecessary-iterable-allocation-for-first-element\RUF015]8;;\[0m[1m Prefer `next(...)` over single element slice[0m
+   [1m[94m--> [0msrc/cwl2click/__init__.py:146:15
+    [1m[94m|[0m
+[1m[94m144[0m [1m[94m|[0m         key = type_
+[1m[94m145[0m [1m[94m|[0m     elif isinstance(type_, list):
+[1m[94m146[0m [1m[94m|[0m         key = [item_type for item_type in type_ if item_type != "null"][0]
+    [1m[94m|[0m               [1m[91m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[1m[94m147[0m [1m[94m|[0m     elif hasattr(type_, "items"):
+[1m[94m148[0m [1m[94m|[0m         key = type_.items
+    [1m[94m|[0m
+[1m[96mhelp[0m[1m: Replace with `next(...)`[0m
+
+[1m[91m]8;;https://docs.astral.sh/ruff/rules/unnecessary-iterable-allocation-for-first-element\RUF015]8;;\[0m[1m Prefer `next(...)` over single element slice[0m
+   [1m[94m--> [0msrc/cwl2click/__init__.py:185:15
+    [1m[94m|[0m
+[1m[94m183[0m [1m[94m|[0m         key = type_
+[1m[94m184[0m [1m[94m|[0m     elif isinstance(type_, list):
+[1m[94m185[0m [1m[94m|[0m         key = [item_type for item_type in type_ if item_type != "null"][0]
+    [1m[94m|[0m               [1m[91m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[1m[94m186[0m [1m[94m|[0m     else:
+[1m[94m187[0m [1m[94m|[0m         key = type_.class_  # type: ignore
+    [1m[94m|[0m
+[1m[96mhelp[0m[1m: Replace with `next(...)`[0m
+
+Found 4 errors.
+[[36m*[0m] 1 fixable with the `--fix` option (2 hidden fixes can be enabled with the `--unsafe-fixes` option).
+
+ruff (check and McCabe complexity).......................................[41mFailed[m
+[2m- hook id: ruff[m
+[2m- exit code: 1[m
+
+[1mcmd [1] | ruff format --check src tests[0m[1m
+[0m[1m[91munformatted:[0m[1m File would be reformatted[0m
+   [1m[94m--> [0msrc/cwl2click/__init__.py:159:18
+[1m[94m   [0m [1m[94m|[0m
+[1m[94m158[0m [1m[94m|[0m
+[1m[94m   [0m [1m[31m-[0m [31m    [0m[1m[31mlogger.debug([0m[0m[31m
+[0m[1m[94m   [0m [1m[31m-[0m [1m[31m        f"Type[0m[0m[31m {type_}, represented by key type {key}, mapped to [0m[1m[31m{mapped_type}"[0m[0m[31m
+[0m[1m[94m   [0m [1m[31m-[0m [1m[31m    )[0m[0m[31m
+[0m[1m[94m159[0m [1m[32m+[0m [32m    [0m[1m[32mlogger.debug(f"Type[0m[0m[32m {type_}, represented by key type {key}, mapped to [0m[1m[32m{mapped_type}")[0m[0m[32m
+[0m[1m[94m160[0m [1m[94m|[0m
+--------------------------------------------------------------------------------
+[1m[94m244[0m [1m[94m|[0m             version=_get_version(),
+[1m[94m   [0m [1m[31m-[0m [31m            timestamp=datetime.fromtimestamp(time.time()).isoformat(
+[0m[1m[94m   [0m [1m[31m-[0m [31m                timespec="milliseconds"
+[0m[1m[94m   [0m [1m[31m-[0m [31m            ),
+[0m[1m[94m245[0m [1m[32m+[0m [32m            timestamp=datetime.fromtimestamp(time.time()).isoformat(timespec="milliseconds"),
+[0m[1m[94m246[0m [1m[94m|[0m             bundle=bundle,
+[1m[94m   [0m [1m[94m|[0m
+
+[1m[91munformatted:[0m[1m File would be reformatted[0m
+  [1m[94m--> [0msrc/cwl2click/plugin.py:38:31
+[1m[94m  [0m [1m[94m|[0m
+[1m[94m37[0m [1m[94m|[0m
+[1m[94m  [0m [1m[31m-[0m [31m    clt_id: list[str] = [0m[1m[31mField([0m[0m[31m
+[0m[1m[94m  [0m [1m[31m-[0m [1m[31m        default_factory=list,[0m[0m[31m description="ID(s) of the [0m[1m[31mCommandLineTools"[0m[0m[31m
+[0m[1m[94m  [0m [1m[31m-[0m [1m[31m    )[0m[0m[31m
+[0m[1m[94m38[0m [1m[32m+[0m [32m    clt_id: list[str] = [0m[1m[32mField(default_factory=list,[0m[0m[32m description="ID(s) of the [0m[1m[32mCommandLineTools")[0m[0m[32m
+[0m[1m[94m39[0m [1m[94m|[0m
+--------------------------------------------------------------------------------
+[1m[94m66[0m [1m[94m|[0m         if options.bundle:
+[1m[94m  [0m [1m[31m-[0m [31m            targets = [0m[1m[31m[[0m[0m[31m
+[0m[1m[94m  [0m [1m[31m-[0m [1m[31m                (_get_target(context.source,[0m[0m[31m options.output), [0m[1m[31mcommand_line_tools)[0m[0m[31m
+[0m[1m[94m  [0m [1m[31m-[0m [1m[31m            ][0m[0m[31m
+[0m[1m[94m67[0m [1m[32m+[0m [32m            targets = [0m[1m[32m[(_get_target(context.source,[0m[0m[32m options.output), [0m[1m[32mcommand_line_tools)][0m[0m[32m
+[0m[1m[94m68[0m [1m[94m|[0m         else:
+[1m[94m  [0m [1m[94m|[0m
+
+[1m[91munformatted:[0m[1m File would be reformatted[0m
+  [1m[94m--> [0mtests/test_bundle.py:48:27
+[1m[94m  [0m [1m[94m|[0m
+[1m[94m47[0m [1m[94m|[0m         context = self.create_context("tests/data/multiple-basecommands.cwl")
+[1m[94m  [0m [1m[31m-[0m [31m        [0m[1m[31mcwl2click.execute([0m[0m[31m
+[0m[1m[94m  [0m [1m[31m-[0m [1m[31m            context,[0m[0m[31m Cwl2ClickOptions(output=self.tmp_path, [0m[1m[31mclt_id=["clt_id"])[0m[0m[31m
+[0m[1m[94m  [0m [1m[31m-[0m [1m[31m        )[0m[0m[31m
+[0m[1m[94m48[0m [1m[32m+[0m [32m        [0m[1m[32mcwl2click.execute(context,[0m[0m[32m Cwl2ClickOptions(output=self.tmp_path, [0m[1m[32mclt_id=["clt_id"]))[0m[0m[32m
+[0m[1m[94m49[0m [1m[94m|[0m         self.assertEqual(
+[1m[94m  [0m [1m[94m|[0m
+
+[1m[91munformatted:[0m[1m File would be reformatted[0m
+  [1m[94m--> [0mtests/utils.py:57:21
+[1m[94m  [0m [1m[94m|[0m
+[1m[94m56[0m [1m[94m|[0m         )
+[1m[94m  [0m [1m[31m-[0m [31m        processes = [0m[1m[31m([0m[0m[31m
+[0m[1m[94m  [0m [1m[31m-[0m [1m[31m            [0m[0m[31mloaded_document if isinstance(loaded_document, list) else [loaded_document]
+[0m[1m[94m  [0m [1m[31m-[0m [1m[31m        )[0m[0m[31m
+[0m[1m[94m57[0m [1m[32m+[0m [32m        processes = [0m[32mloaded_document if isinstance(loaded_document, list) else [loaded_document]
+[0m[1m[94m58[0m [1m[94m|[0m         document = {}
+[1m[94m  [0m [1m[94m|[0m
+
+4 files would be reformatted, 8 files already formatted
+
+bandit (find common security issues).....................................[42mPassed[m
+pytest...................................................................[41mFailed[m
+[2m- hook id: pytest[m
+[2m- exit code: 2[m
+
+[92m───────────────────────────────── [0m[1;36mtest.py3.10[0m[92m ──────────────────────────────────[0m
+[1m============================= test session starts ==============================[0m
+platform linux -- Python 3.10.12, pytest-9.1.1, pluggy-1.6.0
+rootdir: /home/stripodi/Documents/transpiler-mate/cwl2click
+configfile: pyproject.toml
+plugins: cov-7.1.0
+[1mcollecting ... [0m[1mcollected 10 items / 3 errors                                                  [0m
+
+==================================== ERRORS ====================================
+[31m[1m___________________ ERROR collecting tests/test_behaviour.py ___________________[0m
+[31mImportError while importing test module '/home/stripodi/Documents/transpiler-mate/cwl2click/tests/test_behaviour.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests/test_behaviour.py:18: in <module>
+    from click.testing import CliRunner
+E   ModuleNotFoundError: No module named 'click'[0m
+[31m[1m____________________ ERROR collecting tests/test_bundle.py _____________________[0m
+[31mImportError while importing test module '/home/stripodi/Documents/transpiler-mate/cwl2click/tests/test_bundle.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests/test_bundle.py:4: in <module>
+    import click
+E   ModuleNotFoundError: No module named 'click'[0m
+[31m[1m_________________ ERROR collecting tests/test_string_format.py _________________[0m
+[31mImportError while importing test module '/home/stripodi/Documents/transpiler-mate/cwl2click/tests/test_string_format.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests/test_string_format.py:17: in <module>
+    import click
+E   ModuleNotFoundError: No module named 'click'[0m
+[36m[1m=========================== short test summary info ============================[0m
+[31mERROR[0m tests/test_behaviour.py
+[31mERROR[0m tests/test_bundle.py
+[31mERROR[0m tests/test_string_format.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 3 errors during collection !!!!!!!!!!!!!!!!!!!!
+[31m============================== [31m[1m3 errors[0m[31m in 0.23s[0m[31m ===============================[0m
+

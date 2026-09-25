@@ -35,9 +35,7 @@ class Cwl2ClickOptions(BaseModel):
 
     model_config = ConfigDict(extra="forbid")
 
-    clt_id: list[str] = Field(
-        default_factory=list, description="ID(s) of the CommandLineTools"
-    )
+    clt_id: list[str] = Field(default_factory=list, description="ID(s) of the CommandLineTools")
 
     output: Path = Field(description="Output directory path")
     bundle: bool = Field(
@@ -66,9 +64,7 @@ def cwl2click(context: TranspilerContext, options: Cwl2ClickOptions) -> None:
             )
         )
         if options.bundle:
-            targets = [
-                (_get_target(context.source, options.output), command_line_tools)
-            ]
+            targets = [(_get_target(context.source, options.output), command_line_tools)]
         else:
             targets = [
                 (

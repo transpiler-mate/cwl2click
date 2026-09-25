@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""Render Click commands from parsed CWL tools."""
+
 import re
 import time
 from collections.abc import Iterable, Mapping
@@ -48,7 +50,7 @@ def to_snake_case(name: str) -> str:
     return pattern.sub("_", name.replace("-", "_")).lower()
 
 
-def is_array(type_) -> bool:
+def is_array(type_: Any) -> bool:
     return (
         isinstance(type_, list)
         or hasattr(type_, "items")
@@ -78,44 +80,58 @@ def is_required(type_: Any) -> bool:
     return required
 
 
-def is_multiple(type_) -> bool:
+def is_multiple(type_: Any) -> bool:
+    """Indicate whether a CWL input accepts multiple values."""
     if not is_array(type_):
         return False
 
-    array_size: int = _get_array_size(type_)
+    array_size = _get_array_size(type_)
+    nullable_union_size = 2
 
-    return not (array_size == 2 and is_nullable(type_))
+    return not (array_size == nullable_union_size and is_nullable(type_))
 
 
 def is_flag(type_: Any) -> bool:
-    return isinstance(type_, list) and "boolean" in type_ or type_ == "boolean"
+    """Indicate whether a CWL type includes a boolean flag."""
+    return (isinstance(type_, list) and "boolean" in type_) or type_ == "boolean"
 
 
 def get_base_command(clt: CommandLineTool) -> str:
+    """Return the executable name from a CWL tool.
+
+    Raises:
+        ValueError: If the tool does not define a string base command.
+    """
     if clt.baseCommand:
         if isinstance(clt.baseCommand, list) and len(clt.baseCommand) > 0:
-            return clt.baseCommand[0]
+            command = clt.baseCommand[0]
+            if isinstance(command, str):
+                return command
 
         if isinstance(clt.baseCommand, str):
             return clt.baseCommand
 
-    raise Exception(
+    raise ValueError(
         f"CommandLineTool '{clt.id}' does not define a 'baseCommand' property, impossible to map it to a `click.Command`"
     )
 
 
 def get_command_name(clt: CommandLineTool) -> str | None:
+    """Return the subcommand name, or None when no string name is defined."""
     if clt.baseCommand:
         if isinstance(clt.baseCommand, list) and len(clt.baseCommand) > 1:
-            return clt.baseCommand[1]
+            command = clt.baseCommand[1]
+            if isinstance(command, str):
+                return command
 
         if clt.arguments:
             if isinstance(clt.arguments, list):
-                return clt.arguments[0]
+                command = clt.arguments[0]
+                if isinstance(command, str):
+                    return command
+                return None
             return str(clt.arguments)
 
-    #     raise Exception(f"Impossible to extract the sub-command from CommandLineTool '{clt.id}':\n- `clt.baseCommand` contains the tool only or is empty;\n-no `clt.arguments` provided.")
-    # raise Exception(f"CommandLineTool '{clt.id}' does not define a 'baseCommand' property, impossible to map it to a `click.Command`")
     return None
 
 
@@ -137,17 +153,18 @@ _CWL_CLICK_MAP_: Mapping[Any, str] = {
 }
 
 
-def to_click_type(type_: Any) -> str:
-    key = None
+def to_click_type(type_: object) -> str:
+    """Map a parsed CWL type to a Click parameter type expression."""
+    key: object = None
 
     if isinstance(type_, str):
         key = type_
     elif isinstance(type_, list):
-        key = [item_type for item_type in type_ if item_type != "null"][0]
+        key = next(item_type for item_type in type_ if item_type != "null")
     elif hasattr(type_, "items"):
         key = type_.items
     elif hasattr(type_, "class_"):
-        key = type_.class_  # type: ignore
+        key = type_.class_
     elif hasattr(type_, "symbols"):
         return f"Choice({[symbol.split('/')[-1] for symbol in type_.symbols]})"
 
@@ -156,9 +173,7 @@ def to_click_type(type_: Any) -> str:
 
     mapped_type: str = _CWL_CLICK_MAP_.get(key, "STRING")
 
-    logger.debug(
-        f"Type {type_}, represented by key type {key}, mapped to {mapped_type}"
-    )
+    logger.debug(f"Type {type_}, represented by key type {key}, mapped to {mapped_type}")
 
     return mapped_type
 
@@ -175,19 +190,23 @@ _CWL_PYTHON_MAP_: Mapping[Any, str] = {
 }
 
 
-def to_python_type(type_) -> str:
+def to_python_type(type_: object) -> str:
+    """Map a parsed CWL type to its Python type name."""
     logger.debug(f"Converting {type_} CWL type to the related Python type...")
 
-    key: str
+    key: object
     if isinstance(type_, str):
         key = type_
     elif isinstance(type_, list):
-        key = [item_type for item_type in type_ if item_type != "null"][0]
-    else:
-        key = type_.class_  # type: ignore
+        key = next(item_type for item_type in type_ if item_type != "null")
+    elif hasattr(type_, "class_"):
+        key = type_.class_
 
         if key == "enum":
             key = "string"
+
+    else:
+        return str(type_)
 
     return _CWL_PYTHON_MAP_.get(key, str(type_))
 
@@ -238,15 +257,14 @@ def to_click(
     module_name: str,
     output_stream: TextIO,
     bundle: bool = True,
-):
-    template = _jinja_environment.get_template("command_line_tools.py")
+) -> None:
+    """Write generated Click command source to the supplied output stream."""
+    template = _jinja_environment.get_template("command_line_tools.py.jinja")
 
     output_stream.write(
         template.render(
             version=_get_version(),
-            timestamp=datetime.fromtimestamp(time.time()).isoformat(
-                timespec="milliseconds"
-            ),
+            timestamp=datetime.fromtimestamp(time.time()).isoformat(timespec="milliseconds"),
             bundle=bundle,
             module_name=module_name,
             command_line_tools=command_line_tools,

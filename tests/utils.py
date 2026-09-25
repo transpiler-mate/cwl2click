@@ -17,6 +17,7 @@ import sys
 import tempfile
 from pathlib import Path
 
+from click import Command
 from cwl_utils.parser import Process, load_document_by_uri
 from pydantic import AnyUrl
 from transpiler_mate.api import SoftwareApplication, TranspilerContext
@@ -36,27 +37,28 @@ class CWLClickTestCase:
     Mixin providing helpers to generate and import Click CLIs from CWL files.
     """
 
-    def setUp(self):
+    def setUp(self) -> None:
+        """Create an isolated directory for generated commands."""
         self._tmpdir = tempfile.TemporaryDirectory()
         self.tmp_path = Path(self._tmpdir.name)
-        self._imported_modules = []
-        self._added_sys_paths = []
+        self._imported_modules: list[str] = []
+        self._added_sys_paths: list[str] = []
 
-    def tearDown(self):
+    def tearDown(self) -> None:
+        """Remove generated imports and the temporary directory."""
         for name in self._imported_modules:
             sys.modules.pop(name, None)
         for path in self._added_sys_paths:
             sys.path.remove(path)
         self._tmpdir.cleanup()
 
-    def create_context(self, cwl_path: str | Path):
+    def create_context(self, cwl_path: str | Path) -> TranspilerContext:
+        """Load a CWL fixture into a transpiler context."""
         source = Path(cwl_path).resolve()
         loaded_document: Process | list[Process] = load_document_by_uri(
             source.as_uri(), load_all=True
         )
-        processes = (
-            loaded_document if isinstance(loaded_document, list) else [loaded_document]
-        )
+        processes = loaded_document if isinstance(loaded_document, list) else [loaded_document]
         document = {}
         for process in processes:
             process.id = process.id.rsplit("#", maxsplit=1)[-1]
@@ -71,7 +73,8 @@ class CWLClickTestCase:
             resolver=_UnusedResolver(),
         )
 
-    def generate_cli(self, cwl_path: str | Path):
+    def generate_cli(self, cwl_path: str | Path) -> Command:
+        """Generate and import a bundled command from a CWL fixture."""
         context = self.create_context(cwl_path)
         cwl2click.execute(context, Cwl2ClickOptions(output=self.tmp_path, bundle=True))
 
@@ -83,7 +86,7 @@ class CWLClickTestCase:
 
         return self._import_cli(py_files[0])
 
-    def _stub_impl_modules(self, py_file: Path):
+    def _stub_impl_modules(self, py_file: Path) -> None:
         """
         Create dummy implementation modules as a proper Python package
         so imports like `from tmp.foo_impl import execute` succeed.
@@ -105,7 +108,8 @@ class CWLClickTestCase:
                 impl_file = pkg_dir / f"{mod}.py"
                 impl_file.write_text("def execute(*args, **kwargs):\n    pass\n")
 
-    def _import_cli(self, py_file: Path):
+    def _import_cli(self, py_file: Path) -> Command:
+        """Import a generated module and validate its command entry point."""
         module_name = f"cwl2click_test_{py_file.stem}"
 
         # make generated package importable
@@ -133,4 +137,7 @@ class CWLClickTestCase:
         if not hasattr(module, "basecommand"):
             raise AssertionError("Generated module does not expose `basecommand`")
 
-        return module.basecommand
+        command = module.basecommand
+        if not isinstance(command, Command):
+            raise AssertionError("Generated `basecommand` is not a Click command")
+        return command

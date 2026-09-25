@@ -3,6 +3,7 @@ from unittest import TestCase
 
 import click
 from click.testing import CliRunner
+from cwl_utils.parser import cwl_v1_0, cwl_v1_1, cwl_v1_2
 
 from cwl2click import to_snake_case
 from cwl2click.plugin import Cwl2ClickOptions, cwl2click
@@ -10,14 +11,19 @@ from tests.utils import CWLClickTestCase
 
 
 class TestStandalone(CWLClickTestCase, TestCase):
-    def test_default_generates_separate_direct_commands(self):
+    def test_default_generates_separate_direct_commands(self) -> None:
         context = self.create_context("tests/data/multiple-basecommands.cwl")
         # Shared base commands must remain independent, and IDs retain their
         # original spelling in the project directory only.
-        tool = context.document.pop("clt_id_2")
+        document = dict(context.document)
+        tool = document.pop("clt_id_2")
+        assert isinstance(
+            tool, (cwl_v1_0.CommandLineTool, cwl_v1_1.CommandLineTool, cwl_v1_2.CommandLineTool)
+        )
         tool.id = "second-tool"
         tool.baseCommand = ["basecommand", "second"]
-        context.document[tool.id] = tool
+        document[tool.id] = tool
+        context = context.model_copy(update={"document": document})
         cwl2click.execute(context, Cwl2ClickOptions(output=self.tmp_path))
 
         self.assertEqual(len(list(self.tmp_path.rglob("cli.py"))), 4)
@@ -43,11 +49,9 @@ class TestStandalone(CWLClickTestCase, TestCase):
             self.assertIn("this is doc", result.output)
             self.assertIn(f"{package}.cli:basecommand", cli_path.read_text())
 
-    def test_selection_applies_before_standalone_generation(self):
+    def test_selection_applies_before_standalone_generation(self) -> None:
         context = self.create_context("tests/data/multiple-basecommands.cwl")
-        cwl2click.execute(
-            context, Cwl2ClickOptions(output=self.tmp_path, clt_id=["clt_id"])
-        )
+        cwl2click.execute(context, Cwl2ClickOptions(output=self.tmp_path, clt_id=["clt_id"]))
         self.assertEqual(
             list(self.tmp_path.rglob("*.py")),
             [self.tmp_path / "clt_id" / "src" / "clt_id" / "cli.py"],
