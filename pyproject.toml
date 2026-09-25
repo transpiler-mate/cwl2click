@@ -105,7 +105,7 @@ omit = [
 [tool.coverage.paths]
 cwl2click = [
   "src/cwl2click",
-  "*/{{ project_slug }}/src/cwl2click"
+  "*/cwl2click/src/cwl2click"
 ]
 
 [tool.coverage.report]
