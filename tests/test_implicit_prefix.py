@@ -14,15 +14,19 @@
 
 from unittest import TestCase
 
+from click import Group, Path
+
 from tests.utils import CWLClickTestCase
 
 
 class TestImplicitPrefix(CWLClickTestCase, TestCase):
-    def setUp(self):
+    def setUp(self) -> None:
         super().setUp()
-        self.cli = self.generate_cli("tests/data/implicit-prefix.cwl")
+        cli = self.generate_cli("tests/data/implicit-prefix.cwl")
+        assert isinstance(cli, Group)
+        self.cli = cli
 
-    def test_directory_inputs(self):
+    def test_directory_inputs(self) -> None:
         self.assertIn("argument", self.cli.commands)
 
         cmd = self.cli.commands["argument"]
@@ -31,18 +35,20 @@ class TestImplicitPrefix(CWLClickTestCase, TestCase):
         self.assertIn("file_input", params)
 
         opt = params["directory_input"]
+        assert isinstance(opt.type, Path)
         self.assertTrue(opt.type.dir_okay)
         self.assertFalse(opt.type.file_okay)
         self.assertTrue(opt.type.exists)
         self.assertTrue(opt.type.readable)
         self.assertTrue(opt.type.resolve_path)
 
-    def test_file_inputs(self):
+    def test_file_inputs(self) -> None:
         cmd = self.cli.commands["argument"]
         params = {p.name: p for p in cmd.params}
         self.assertIn("file_input", params)
 
         opt = params["file_input"]
+        assert isinstance(opt.type, Path)
 
         self.assertTrue(opt.type.file_okay)
         self.assertFalse(opt.type.dir_okay)

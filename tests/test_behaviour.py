@@ -21,10 +21,10 @@ from tests.utils import CWLClickTestCase
 
 
 class TestBehaviour(CWLClickTestCase, TestCase):
-    def setUp(self):
+    def setUp(self) -> None:
         super().setUp()
 
-    def test_basecommand_argument(self):
+    def test_basecommand_argument(self) -> None:
         cli = self.generate_cli("tests/data/basecommand-argument.cwl")
 
         runner = CliRunner()
@@ -33,7 +33,7 @@ class TestBehaviour(CWLClickTestCase, TestCase):
         self.assertNotEqual(result.exit_code, 0)
         self.assertIn("Error: Missing option '--input'.", result.output)
 
-    def test_basecommand_argument_help(self):
+    def test_basecommand_argument_help(self) -> None:
         cli = self.generate_cli("tests/data/basecommand-argument.cwl")
 
         runner = CliRunner()
@@ -45,7 +45,7 @@ class TestBehaviour(CWLClickTestCase, TestCase):
         self.assertIn("this is doc", result.output)
         self.assertIn("--help", result.output)
 
-    def test_no_argument(self):
+    def test_no_argument(self) -> None:
         cli = self.generate_cli("tests/data/no-argument.cwl")
 
         runner = CliRunner()
@@ -56,7 +56,7 @@ class TestBehaviour(CWLClickTestCase, TestCase):
         self.assertIn("Try 'basecommand --help' for help.", result.output)
         self.assertIn("Error: Missing option '--directory-input'.", result.output)
 
-    def test_multiple_basecommands(self):
+    def test_multiple_basecommands(self) -> None:
         cli = self.generate_cli(Path("tests/data/multiple-basecommands.cwl"))
 
         self.assertIsNotNone(cli)

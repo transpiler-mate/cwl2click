@@ -14,15 +14,18 @@
 
 from unittest import TestCase
 
+from click import Group, Option
+
 from tests.utils import CWLClickTestCase
 
 
 class TestDocLabel(CWLClickTestCase, TestCase):
-    def setUp(self):
+    def setUp(self) -> None:
         super().setUp()
 
-    def test_label(self):
+    def test_label(self) -> None:
         cli = self.generate_cli("tests/data/doc-label.cwl")
+        assert isinstance(cli, Group)
 
         self.assertIn("argument", cli.commands)
 
@@ -35,10 +38,12 @@ class TestDocLabel(CWLClickTestCase, TestCase):
         self.assertIn("input", params)
 
         opt = params["input"]
+        assert isinstance(opt, Option)
         self.assertEqual(opt.help, "this is input label")
 
-    def test_multiline_doc_is_normalized_for_help(self):
+    def test_multiline_doc_is_normalized_for_help(self) -> None:
         cli = self.generate_cli("tests/data/doc-multiline.cwl")
+        assert isinstance(cli, Group)
 
         self.assertIn("argument", cli.commands)
 
@@ -47,8 +52,9 @@ class TestDocLabel(CWLClickTestCase, TestCase):
         self.assertEqual(cmd.help, "This tool makes Earth Observation Great Again")
         self.assertEqual(cmd.short_help, "this is label")
 
-    def test_multiline_doc_preserves_paragraphs_and_uses_triple_quotes(self):
+    def test_multiline_doc_preserves_paragraphs_and_uses_triple_quotes(self) -> None:
         cli = self.generate_cli("tests/data/doc-paragraphs.cwl")
+        assert isinstance(cli, Group)
 
         self.assertIn("argument", cli.commands)
 

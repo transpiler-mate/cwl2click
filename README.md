@@ -4,6 +4,8 @@ Boostrap a Python CLI using `click` from a CWL `CommandLineTool`(s).
 
 [![PyPI - Version](https://img.shields.io/pypi/v/cwl2click.svg)](https://pypi.org/project/cwl2click)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/cwl2click.svg)](https://pypi.org/project/cwl2click)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/transpiler-mate/cwl2click/package.yaml?branch=develop&event=push&label=build&logo=githubactions)](https://github.com/transpiler-mate/cwl2click/actions/workflows/package.yaml?query=branch%3Adevelop)
+[![Code coverage](https://img.shields.io/codecov/c/github/transpiler-mate/cwl2click/develop?logo=codecov)](https://app.codecov.io/gh/transpiler-mate/cwl2click/tree/develop)
 
 -----
 

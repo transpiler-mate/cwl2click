@@ -14,15 +14,18 @@
 
 from unittest import TestCase
 
+from click import Group
+
 from tests.utils import CWLClickTestCase
 
 
 class TestInputTypes(CWLClickTestCase, TestCase):
-    def setUp(self):
+    def setUp(self) -> None:
         super().setUp()
 
-    def test_input_types(self):
+    def test_input_types(self) -> None:
         cli = self.generate_cli("tests/data/input-types.cwl")
+        assert isinstance(cli, Group)
 
         self.assertIn("argument", cli.commands)
 
@@ -60,8 +63,9 @@ class TestInputTypes(CWLClickTestCase, TestCase):
         self.assertEqual(opt.type.name, "float")
         self.assertFalse(opt.multiple)
 
-    def test_array_input_types(self):
+    def test_array_input_types(self) -> None:
         cli = self.generate_cli("tests/data/array-input-types.cwl")
+        assert isinstance(cli, Group)
 
         self.assertIn("argument", cli.commands)
 
@@ -93,8 +97,9 @@ class TestInputTypes(CWLClickTestCase, TestCase):
         self.assertEqual(opt.type.name, "float")
         self.assertTrue(opt.multiple)
 
-    def test_optional_input_types(self):
+    def test_optional_input_types(self) -> None:
         cli = self.generate_cli("tests/data/optional-input-types.cwl")
+        assert isinstance(cli, Group)
 
         self.assertIn("argument", cli.commands)
 
