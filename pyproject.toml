@@ -127,7 +127,7 @@ exclude_lines = [
 skip-install = false
 dependencies = [
   "click>=8.4.2,<9",
-  "pytest>=8.4,<10",
+  "pytest>=9.1.1,<10",
   "pytest-cov>=6.2,<8",
 ]
 
@@ -166,7 +166,7 @@ dependencies = [
   "ruff>=0.16.0",
   "bandit>=1.9.4",
   "click>=8.4.2,<9",
-  "pytest>=8.4,<10",
+  "pytest>=9.1.1,<10",
 ]
 
 # ---------------------------------------------------------------------------
@@ -318,6 +318,6 @@ check = [
 [project.optional-dependencies]
 test = [
   "click>=8.4.2,<9",
-  "pytest>=8.4,<10",
+  "pytest>=9.1.1,<10",
   "pytest-cov>=6.2,<8"
 ]
