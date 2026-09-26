@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Fabrice Brito, Simone Tripodi" /><link rel="canonical" href="https://Transpiler-Mate.github.io/cwl2click/execution/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Execution - CWL2Click</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../assets/_mkdocstrings.css" rel="stylesheet" />
+        <link href="../styles/css/app.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Execution";
+        var mkdocs_page_input_path = "execution.md";
+        var mkdocs_page_url = "/cwl2click/execution/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="..">
+          <img src="../imgs/icon-eoap.png" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Introduction</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Execution</a>
+    <ul class="current">
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../adopters/">Adopters recommendations</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../crosswalk/">Crosswalk</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../plugin/">Using the transpiler-mate plugin</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../api/">APIs</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">CWL2Click</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Execution</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/Transpiler-Mate/cwl2click/edit/master/docs/execution.md">Edit on Transpiler-Mate/cwl2click</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="execution">Execution</h1>
+<p>Based on a KISS approach:</p>
+<div class="highlight"><pre><span></span><code><span id="__span-0-1">Usage:<span class="w"> </span>transpiler-mate<span class="w"> </span>cwl2click<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span><span class="w"> </span>SOURCE
+</span><span id="__span-0-2">
+</span><span id="__span-0-3"><span class="w">  </span>Boostrap<span class="w"> </span>a<span class="w"> </span>Python<span class="w"> </span>CLI<span class="w"> </span>using<span class="w"> </span>click<span class="w"> </span>from<span class="w"> </span>a<span class="w"> </span>CWL<span class="w"> </span>CommandLineTool<span class="o">(</span>s<span class="o">)</span>.
+</span><span id="__span-0-4">
+</span><span id="__span-0-5">Options:
+</span><span id="__span-0-6"><span class="w">  </span>--oci-hostname<span class="w"> </span>TEXT<span class="w">   </span><span class="o">[</span>env<span class="w"> </span>var:<span class="w"> </span>OCI_HOSTNAME<span class="o">]</span>
+</span><span id="__span-0-7"><span class="w">  </span>--oci-username<span class="w"> </span>TEXT<span class="w">   </span><span class="o">[</span>env<span class="w"> </span>var:<span class="w"> </span>OCI_USERNAME<span class="o">]</span>
+</span><span id="__span-0-8"><span class="w">  </span>--oci-password<span class="w"> </span>TEXT<span class="w">   </span><span class="o">[</span>env<span class="w"> </span>var:<span class="w"> </span>OCI_PASSWORD<span class="o">]</span>
+</span><span id="__span-0-9"><span class="w">  </span>--oauth2-bearer<span class="w"> </span>TEXT<span class="w">  </span><span class="o">[</span>env<span class="w"> </span>var:<span class="w"> </span>OAUTH2_BEARER<span class="o">]</span>
+</span><span id="__span-0-10"><span class="w">  </span>--bundle<span class="w">              </span>Bundle<span class="w"> </span>all<span class="w"> </span>tools<span class="w"> </span>into<span class="w"> </span>one<span class="w"> </span>module<span class="w"> </span>with<span class="w"> </span>subcommands
+</span><span id="__span-0-11"><span class="w">  </span>--clt-id<span class="w"> </span>TEXT<span class="w">         </span>ID<span class="o">(</span>s<span class="o">)</span><span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>CommandLineTools
+</span><span id="__span-0-12"><span class="w">  </span>--output<span class="w"> </span>PATH<span class="w">         </span>Output<span class="w"> </span>directory<span class="w"> </span>path<span class="w">  </span><span class="o">[</span>required<span class="o">]</span>
+</span><span id="__span-0-13"><span class="w">  </span>--help<span class="w">                </span>Show<span class="w"> </span>this<span class="w"> </span>message<span class="w"> </span>and<span class="w"> </span>exit.
+</span></code></pre></div>
+<p>Users can generate <code>Click</code> code by executing:</p>
+<div class="highlight"><pre><span></span><code><span id="__span-1-1">$<span class="w"> </span>transpiler-mate<span class="w"> </span>cwl2click<span class="w"> </span>--bundle<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-1-2"><span class="w">    </span>--output<span class="w"> </span>./src/test<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-1-3"><span class="w">    </span>https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/develop/cwl-workflow/pattern-12.cwl
+</span></code></pre></div>
+<p>and monitor the execution:</p>
+<div class="highlight"><pre><span></span><code><span id="__span-2-1">2026-09-16 12:16:39.840 | INFO     | transpiler_mate.runtime.cli:invoke_plugin:280 - 
+</span><span id="__span-2-2">━┏┛┏━┃┏━┃┏━ ┏━┛┏━┃┛┃  ┏━┛┏━┃  ┏┏ ┏━┃━┏┛┏━┛
+</span><span id="__span-2-3"> ┃ ┏┏┛┏━┃┃ ┃━━┃┏━┛┃┃  ┏━┛┏┏┛  ┃┃┃┏━┃ ┃ ┏━┛
+</span><span id="__span-2-4"> ┛ ┛ ┛┛ ┛┛ ┛━━┛┛  ┛━━┛━━┛┛ ┛  ┛┛┛┛ ┛ ┛ ━━┛
+</span><span id="__span-2-5">
+</span><span id="__span-2-6"> v1.0.1 by Terradue srl
+</span><span id="__span-2-7"> info[at]terradue[dot]com
+</span><span id="__span-2-8">
+</span><span id="__span-2-9">2026-09-16 12:16:39.840 | INFO     | transpiler_mate.runtime.cli:invoke_plugin:289 - Started at: 2026-09-16T12:16:39.840
+</span><span id="__span-2-10">2026-09-16 12:16:39.841 | DEBUG    | transpiler_mate.runtime.context_resolver:_mount_session:68 - Mounting 'http://' scheme to 'HTTPAdapter'...
+</span><span id="__span-2-11">2026-09-16 12:16:39.841 | DEBUG    | transpiler_mate.runtime.context_resolver:_mount_session:70 - Scheme 'http://' successfully mount to 'HTTPAdapter'
+</span><span id="__span-2-12">2026-09-16 12:16:39.841 | DEBUG    | transpiler_mate.runtime.context_resolver:_mount_session:68 - Mounting 'https://' scheme to 'HTTPAdapter'...
+</span><span id="__span-2-13">2026-09-16 12:16:39.841 | DEBUG    | transpiler_mate.runtime.context_resolver:_mount_session:70 - Scheme 'https://' successfully mount to 'HTTPAdapter'
+</span><span id="__span-2-14">2026-09-16 12:16:39.841 | DEBUG    | transpiler_mate.runtime.context_resolver:_mount_session:68 - Mounting 'file://' scheme to 'FileAdapter'...
+</span><span id="__span-2-15">2026-09-16 12:16:39.841 | DEBUG    | transpiler_mate.runtime.context_resolver:_mount_session:70 - Scheme 'file://' successfully mount to 'FileAdapter'
+</span><span id="__span-2-16">2026-09-16 12:16:39.841 | DEBUG    | transpiler_mate.runtime.context_resolver:_mount_session:68 - Mounting 'oci://' scheme to 'OCIAdapter'...
+</span><span id="__span-2-17">2026-09-16 12:16:39.841 | DEBUG    | transpiler_mate.runtime.context_resolver:_mount_session:70 - Scheme 'oci://' successfully mount to 'OCIAdapter'
+</span><span id="__span-2-18">2026-09-16 12:16:39.841 | DEBUG    | cwl_loader:load_cwl_from_location:368 - Loading CWL document from https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/develop/cwl-workflow/pattern-12.cwl...
+</span><span id="__span-2-19">2026-09-16 12:16:40.043 | DEBUG    | cwl_loader:_load_cwl_from_stream:371 - Reading stream from https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/develop/cwl-workflow/pattern-12.cwl...
+</span><span id="__span-2-20">2026-09-16 12:16:40.077 | DEBUG    | cwl_loader:load_cwl_from_stream:338 - CWL data of type &lt;class 'ruamel.yaml.comments.CommentedMap'&gt; successfully loaded from stream
+</span><span id="__span-2-21">2026-09-16 12:16:40.077 | DEBUG    | cwl_loader:load_cwl_from_yaml:261 - No needs to update the Raw CWL document since it targets already the v1.2
+</span><span id="__span-2-22">2026-09-16 12:16:40.077 | DEBUG    | cwl_loader:load_cwl_from_yaml:265 - Parsing the raw CWL document to the CWL Utils DOM...
+</span><span id="__span-2-23">2026-09-16 12:16:48.834 | DEBUG    | cwl_loader:load_cwl_from_yaml:274 - Raw CWL document successfully parsed to the CWL Utils DOM!
+</span><span id="__span-2-24">2026-09-16 12:16:48.834 | DEBUG    | cwl_loader:load_cwl_from_yaml:276 - Dereferencing the steps[].run...
+</span><span id="__span-2-25">2026-09-16 12:16:48.834 | DEBUG    | cwl_loader._dereference:_dereference_step:143 - Checking if https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/develop/cwl-workflow/pattern-12.cwl#crop must be externally imported...
+</span><span id="__span-2-26">2026-09-16 12:16:48.834 | DEBUG    | cwl_loader._dereference:_dereference_step:145 - run_url: https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/develop/cwl-workflow/pattern-12.cwl - uri: https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/develop/cwl-workflow/pattern-12.cwl
+</span><span id="__span-2-27">2026-09-16 12:16:48.834 | DEBUG    | cwl_loader._dereference:_dereference_step:143 - Checking if https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/develop/cwl-workflow/pattern-12.cwl#norm_diff must be externally imported...
+</span><span id="__span-2-28">2026-09-16 12:16:48.834 | DEBUG    | cwl_loader._dereference:_dereference_step:145 - run_url: https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/develop/cwl-workflow/pattern-12.cwl - uri: https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/develop/cwl-workflow/pattern-12.cwl
+</span><span id="__span-2-29">2026-09-16 12:16:48.834 | DEBUG    | cwl_loader._dereference:_dereference_step:143 - Checking if https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/develop/cwl-workflow/pattern-12.cwl#otsu must be externally imported...
+</span><span id="__span-2-30">2026-09-16 12:16:48.834 | DEBUG    | cwl_loader._dereference:_dereference_step:145 - run_url: https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/develop/cwl-workflow/pattern-12.cwl - uri: https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/develop/cwl-workflow/pattern-12.cwl
+</span><span id="__span-2-31">2026-09-16 12:16:48.834 | DEBUG    | cwl_loader:load_cwl_from_yaml:285 - steps[].run successfully dereferenced! Dereferencing the FQNs...
+</span><span id="__span-2-32">2026-09-16 12:16:48.834 | DEBUG    | cwl_loader:load_cwl_from_yaml:289 - CWL document successfully dereferenced! Now verifying steps[].run integrity...
+</span><span id="__span-2-33">2026-09-16 12:16:48.834 | DEBUG    | cwl_loader:load_cwl_from_yaml:295 - All steps[].run link are resolvable! 
+</span><span id="__span-2-34">2026-09-16 12:16:48.834 | DEBUG    | cwl_loader:load_cwl_from_yaml:298 - Sorting Process instances by dependencies....
+</span><span id="__span-2-35">2026-09-16 12:16:48.834 | DEBUG    | cwl_loader:load_cwl_from_yaml:300 - Sorting process is over.
+</span><span id="__span-2-36">2026-09-16 12:16:48.834 | DEBUG    | cwl_loader:_load_cwl_from_stream:381 - Stream from https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/develop/cwl-workflow/pattern-12.cwl successfully load!
+</span><span id="__span-2-37">2026-09-16 12:16:48.848 | DEBUG    | cwl2click:to_click_type:159 - Type &lt;cwl_utils.parser.cwl_v1_2.CommandInputArraySchema object at 0x7250ef1094b0&gt;, represented by key type Directory, mapped to Path(path_type=Path, exists=True, readable=True, resolve_path=True, file_okay=False, dir_okay=True)
+</span><span id="__span-2-38">2026-09-16 12:16:48.848 | DEBUG    | cwl2click:is_required:76 - Detected type &lt;cwl_utils.parser.cwl_v1_2.CommandInputArraySchema object at 0x7250ef1094b0&gt; as required: True
+</span><span id="__span-2-39">2026-09-16 12:16:48.848 | DEBUG    | cwl2click:to_click_type:159 - Type Directory, represented by key type Directory, mapped to Path(path_type=Path, exists=True, readable=True, resolve_path=True, file_okay=False, dir_okay=True)
+</span><span id="__span-2-40">2026-09-16 12:16:48.849 | DEBUG    | cwl2click:is_required:76 - Detected type Directory as required: True
+</span><span id="__span-2-41">2026-09-16 12:16:48.849 | DEBUG    | cwl2click:to_click_type:159 - Type https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml#URI, represented by key type https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml#URI, mapped to STRING
+</span><span id="__span-2-42">2026-09-16 12:16:48.849 | DEBUG    | cwl2click:is_required:76 - Detected type https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml#URI as required: True
+</span><span id="__span-2-43">2026-09-16 12:16:48.849 | DEBUG    | cwl2click:to_click_type:159 - Type Directory, represented by key type Directory, mapped to Path(path_type=Path, exists=True, readable=True, resolve_path=True, file_okay=False, dir_okay=True)
+</span><span id="__span-2-44">2026-09-16 12:16:48.849 | DEBUG    | cwl2click:is_required:76 - Detected type Directory as required: True
+</span><span id="__span-2-45">2026-09-16 12:16:48.849 | DEBUG    | cwl2click:to_click_type:159 - Type Directory, represented by key type Directory, mapped to Path(path_type=Path, exists=True, readable=True, resolve_path=True, file_okay=False, dir_okay=True)
+</span><span id="__span-2-46">2026-09-16 12:16:48.849 | DEBUG    | cwl2click:is_required:76 - Detected type Directory as required: True
+</span><span id="__span-2-47">2026-09-16 12:16:48.850 | DEBUG    | cwl2click:to_click_type:159 - Type https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml#URI, represented by key type https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml#URI, mapped to STRING
+</span><span id="__span-2-48">2026-09-16 12:16:48.850 | DEBUG    | cwl2click:is_required:76 - Detected type https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml#URI as required: True
+</span><span id="__span-2-49">2026-09-16 12:16:48.850 | DEBUG    | cwl2click:to_click_type:159 - Type Directory, represented by key type Directory, mapped to Path(path_type=Path, exists=True, readable=True, resolve_path=True, file_okay=False, dir_okay=True)
+</span><span id="__span-2-50">2026-09-16 12:16:48.850 | DEBUG    | cwl2click:is_required:76 - Detected type Directory as required: True
+</span><span id="__span-2-51">2026-09-16 12:16:48.850 | DEBUG    | cwl2click:to_click_type:159 - Type https://raw.githubusercontent.com/eoap/schemas/main/ogc.yaml#BBox, represented by key type https://raw.githubusercontent.com/eoap/schemas/main/ogc.yaml#BBox, mapped to STRING
+</span><span id="__span-2-52">2026-09-16 12:16:48.850 | DEBUG    | cwl2click:is_required:76 - Detected type https://raw.githubusercontent.com/eoap/schemas/main/ogc.yaml#BBox as required: True
+</span><span id="__span-2-53">2026-09-16 12:16:48.850 | DEBUG    | cwl2click:to_click_type:159 - Type https://raw.githubusercontent.com/eoap/schemas/main/ogc.yaml#BBox, represented by key type https://raw.githubusercontent.com/eoap/schemas/main/ogc.yaml#BBox, mapped to STRING
+</span><span id="__span-2-54">2026-09-16 12:16:48.850 | DEBUG    | cwl2click:is_required:76 - Detected type https://raw.githubusercontent.com/eoap/schemas/main/ogc.yaml#BBox as required: True
+</span><span id="__span-2-55">2026-09-16 12:16:48.850 | DEBUG    | cwl2click:to_click_type:159 - Type string, represented by key type string, mapped to STRING
+</span><span id="__span-2-56">2026-09-16 12:16:48.850 | DEBUG    | cwl2click:is_required:76 - Detected type string as required: True
+</span><span id="__span-2-57">2026-09-16 12:16:48.850 | DEBUG    | cwl2click:to_click_type:159 - Type https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml#URI, represented by key type https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml#URI, mapped to STRING
+</span><span id="__span-2-58">2026-09-16 12:16:48.850 | DEBUG    | cwl2click:is_required:76 - Detected type https://raw.githubusercontent.com/eoap/schemas/main/string_format.yaml#URI as required: True
+</span><span id="__span-2-59">2026-09-16 12:16:48.850 | SUCCESS  | cwl2click.plugin:cwl2click:73 - 'https://raw.githubusercontent.com/eoap/application-package-patterns/refs/heads/develop/cwl-workflow/pattern-12.cwl' successfully converted to Click Python application in '/home/stripodi/Downloads/src/test/pattern_12.py'.
+</span><span id="__span-2-60">2026-09-16 12:16:48.850 | SUCCESS  | transpiler_mate.runtime.cli:invoke_plugin:326 - ------------------------------------------------------------------------
+</span><span id="__span-2-61">2026-09-16 12:16:48.850 | SUCCESS  | transpiler_mate.runtime.cli:invoke_plugin:327 - SUCCESS
+</span><span id="__span-2-62">2026-09-16 12:16:48.850 | SUCCESS  | transpiler_mate.runtime.cli:invoke_plugin:328 - ------------------------------------------------------------------------
+</span><span id="__span-2-63">2026-09-16 12:16:48.850 | INFO     | transpiler_mate.runtime.cli:invoke_plugin:331 - Total time: 9.0096 seconds
+</span><span id="__span-2-64">2026-09-16 12:16:48.850 | INFO     | transpiler_mate.runtime.cli:invoke_plugin:332 - Finished at: 2026-09-16T12:16:48.850
+</span></code></pre></div>
+<p>As reported in the <code>SUCCESS</code> logging message, the <code>Click</code> application is serialized to the <code>/path/to/your-project/src/your-module/pattern-12.py</code> file:</p>
+<div class="highlight"><pre><span></span><code><span id="__span-3-1"># File generated by cwl2click v0.8.0
+</span><span id="__span-3-2"># timestamp: 2026-09-16T12:16:48.848
+</span><span id="__span-3-3">
+</span><span id="__span-3-4">__all__ = []
+</span><span id="__span-3-5">
+</span><span id="__span-3-6">from test.norm_diff_impl import execute as norm_diff_command
+</span><span id="__span-3-7">from test.otsu_impl import execute as otsu_command
+</span><span id="__span-3-8">from test.crop_impl import execute as crop_command
+</span><span id="__span-3-9">
+</span><span id="__span-3-10">from pathlib import Path
+</span><span id="__span-3-11">
+</span><span id="__span-3-12">import click
+</span><span id="__span-3-13">
+</span><span id="__span-3-14">
+</span><span id="__span-3-15">
+</span><span id="__span-3-16">
+</span><span id="__span-3-17">
+</span><span id="__span-3-18">
+</span><span id="__span-3-19">
+</span><span id="__span-3-20"># None
+</span><span id="__span-3-21">__all__.append("runner")
+</span><span id="__span-3-22"># NOTE
+</span><span id="__span-3-23"># Do not forget to add the section below in your `pyproject.toml` file
+</span><span id="__span-3-24">#  
+</span><span id="__span-3-25"># [project.scripts]
+</span><span id="__span-3-26"># ndi-cli = "test.norm_diff:runner"
+</span><span id="__span-3-27">@click.group()
+</span><span id="__span-3-28">def runner() -&gt; None:
+</span><span id="__span-3-29">    pass
+</span><span id="__span-3-30">
+</span><span id="__span-3-31">
+</span><span id="__span-3-32">
+</span><span id="__span-3-33">runner.add_command(
+</span><span id="__span-3-34">    click.Command(
+</span><span id="__span-3-35">        name="ndi-cli",
+</span><span id="__span-3-36">        callback=norm_diff_command,
+</span><span id="__span-3-37">        help="""No info provided""",
+</span><span id="__span-3-38">        short_help="""No info provided""",
+</span><span id="__span-3-39">        params=[
+</span><span id="__span-3-40">            click.Option(
+</span><span id="__span-3-41">                ["--rasters"],
+</span><span id="__span-3-42">                "rasters",
+</span><span id="__span-3-43">                type=click.Path(path_type=Path, exists=True, readable=True, resolve_path=True, file_okay=False, dir_okay=True),
+</span><span id="__span-3-44">                multiple=True,
+</span><span id="__span-3-45">                required=True,
+</span><span id="__span-3-46">                is_flag=False,
+</span><span id="__span-3-47">            ),
+</span><span id="__span-3-48">            click.Option(
+</span><span id="__span-3-49">                ["--item"],
+</span><span id="__span-3-50">                "item",
+</span><span id="__span-3-51">                type=click.Path(path_type=Path, exists=True, readable=True, resolve_path=True, file_okay=False, dir_okay=True),
+</span><span id="__span-3-52">                multiple=False,
+</span><span id="__span-3-53">                required=True,
+</span><span id="__span-3-54">                is_flag=False,
+</span><span id="__span-3-55">            ),
+</span><span id="__span-3-56">            click.Option(
+</span><span id="__span-3-57">                ["--collection"],
+</span><span id="__span-3-58">                "collection",
+</span><span id="__span-3-59">                type=click.STRING,
+</span><span id="__span-3-60">                multiple=False,
+</span><span id="__span-3-61">                required=True,
+</span><span id="__span-3-62">                is_flag=False,
+</span><span id="__span-3-63">            ),
+</span><span id="__span-3-64">        ]
+</span><span id="__span-3-65">    )
+</span><span id="__span-3-66">)
+</span><span id="__span-3-67">
+</span><span id="__span-3-68">
+</span><span id="__span-3-69">
+</span><span id="__span-3-70">
+</span><span id="__span-3-71">
+</span><span id="__span-3-72">
+</span><span id="__span-3-73">
+</span><span id="__span-3-74">
+</span><span id="__span-3-75">runner.add_command(
+</span><span id="__span-3-76">    click.Command(
+</span><span id="__span-3-77">        name="otsu-cli",
+</span><span id="__span-3-78">        callback=otsu_command,
+</span><span id="__span-3-79">        help="""No info provided""",
+</span><span id="__span-3-80">        short_help="""No info provided""",
+</span><span id="__span-3-81">        params=[
+</span><span id="__span-3-82">            click.Option(
+</span><span id="__span-3-83">                ["--input-ndi"],
+</span><span id="__span-3-84">                "raster",
+</span><span id="__span-3-85">                type=click.Path(path_type=Path, exists=True, readable=True, resolve_path=True, file_okay=False, dir_okay=True),
+</span><span id="__span-3-86">                multiple=False,
+</span><span id="__span-3-87">                required=True,
+</span><span id="__span-3-88">                is_flag=False,
+</span><span id="__span-3-89">            ),
+</span><span id="__span-3-90">            click.Option(
+</span><span id="__span-3-91">                ["--item"],
+</span><span id="__span-3-92">                "item",
+</span><span id="__span-3-93">                type=click.Path(path_type=Path, exists=True, readable=True, resolve_path=True, file_okay=False, dir_okay=True),
+</span><span id="__span-3-94">                multiple=False,
+</span><span id="__span-3-95">                required=True,
+</span><span id="__span-3-96">                is_flag=False,
+</span><span id="__span-3-97">            ),
+</span><span id="__span-3-98">            click.Option(
+</span><span id="__span-3-99">                ["--collection"],
+</span><span id="__span-3-100">                "collection",
+</span><span id="__span-3-101">                type=click.STRING,
+</span><span id="__span-3-102">                multiple=False,
+</span><span id="__span-3-103">                required=True,
+</span><span id="__span-3-104">                is_flag=False,
+</span><span id="__span-3-105">            ),
+</span><span id="__span-3-106">        ]
+</span><span id="__span-3-107">    )
+</span><span id="__span-3-108">)
+</span><span id="__span-3-109">
+</span><span id="__span-3-110">
+</span><span id="__span-3-111">
+</span><span id="__span-3-112">
+</span><span id="__span-3-113">
+</span><span id="__span-3-114">
+</span><span id="__span-3-115">
+</span><span id="__span-3-116">
+</span><span id="__span-3-117">runner.add_command(
+</span><span id="__span-3-118">    click.Command(
+</span><span id="__span-3-119">        name="crop-cli",
+</span><span id="__span-3-120">        callback=crop_command,
+</span><span id="__span-3-121">        help="""No info provided""",
+</span><span id="__span-3-122">        short_help="""No info provided""",
+</span><span id="__span-3-123">        params=[
+</span><span id="__span-3-124">            click.Option(
+</span><span id="__span-3-125">                ["--input-item"],
+</span><span id="__span-3-126">                "item",
+</span><span id="__span-3-127">                type=click.Path(path_type=Path, exists=True, readable=True, resolve_path=True, file_okay=False, dir_okay=True),
+</span><span id="__span-3-128">                multiple=False,
+</span><span id="__span-3-129">                required=True,
+</span><span id="__span-3-130">                is_flag=False,
+</span><span id="__span-3-131">            ),
+</span><span id="__span-3-132">            click.Option(
+</span><span id="__span-3-133">                ["--aoi"],
+</span><span id="__span-3-134">                "aoi",
+</span><span id="__span-3-135">                type=click.STRING,
+</span><span id="__span-3-136">                multiple=False,
+</span><span id="__span-3-137">                required=True,
+</span><span id="__span-3-138">                is_flag=False,
+</span><span id="__span-3-139">                help="""Area of interest defined as a bounding box""",
+</span><span id="__span-3-140">            ),
+</span><span id="__span-3-141">            click.Option(
+</span><span id="__span-3-142">                ["--epsg"],
+</span><span id="__span-3-143">                "epsg",
+</span><span id="__span-3-144">                type=click.STRING,
+</span><span id="__span-3-145">                multiple=False,
+</span><span id="__span-3-146">                required=True,
+</span><span id="__span-3-147">                is_flag=False,
+</span><span id="__span-3-148">            ),
+</span><span id="__span-3-149">            click.Option(
+</span><span id="__span-3-150">                ["--band"],
+</span><span id="__span-3-151">                "band",
+</span><span id="__span-3-152">                type=click.STRING,
+</span><span id="__span-3-153">                multiple=False,
+</span><span id="__span-3-154">                required=True,
+</span><span id="__span-3-155">                is_flag=False,
+</span><span id="__span-3-156">            ),
+</span><span id="__span-3-157">            click.Option(
+</span><span id="__span-3-158">                ["--collection"],
+</span><span id="__span-3-159">                "collection",
+</span><span id="__span-3-160">                type=click.STRING,
+</span><span id="__span-3-161">                multiple=False,
+</span><span id="__span-3-162">                required=True,
+</span><span id="__span-3-163">                is_flag=False,
+</span><span id="__span-3-164">            ),
+</span><span id="__span-3-165">        ]
+</span><span id="__span-3-166">    )
+</span><span id="__span-3-167">)
+</span></code></pre></div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href=".." class="btn btn-neutral float-left" title="Introduction"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../adopters/" class="btn btn-neutral float-right" title="Adopters recommendations">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p><a href="https://www.apache.org/licenses/LICENSE-2.0"><img src="https://img.shields.io/badge/license-Apache%20License%202.0-blue"" alt="Apache License, Version 2.0" /></a></p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/Transpiler-Mate/cwl2click/" class="fa fa-code-fork" style="color: #fcfcfc"> Transpiler-Mate/cwl2click</a>
+        </span>
+    
+    
+      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../adopters/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../javascripts/config.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
