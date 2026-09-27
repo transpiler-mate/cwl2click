@@ -23,6 +23,12 @@ release tags.
 
 ### Security
 
+## [0.10.1] - 2026-09-27
+
+### Changed
+
+* Improve type annotations and internal code quality by addressing mypy, Ruff, and Bandit findings, without changing public APIs or runtime behavior.
+
 ## [0.10.0] - 2026-09-22
 
 ### Changed
@@ -172,7 +178,8 @@ release tags.
 - Apache-2.0 license and notice files.
 - README with the initial project purpose and installation instructions.
 
-[Unreleased]: https://github.com/Transpiler-Mate/cwl2click/compare/v0.10.0...HEAD
+[Unreleased]: https://github.com/Transpiler-Mate/cwl2click/compare/v0.10.1...HEAD
+[0.10.1]: https://github.com/Transpiler-Mate/cwl2click/compare/v0.10.0...v0.10.1
 [0.10.0]: https://github.com/Transpiler-Mate/cwl2click/compare/v0.9.0...v0.10.0
 [0.9.0]: https://github.com/Transpiler-Mate/cwl2click/compare/v0.8.0...v0.9.0
 [0.8.0]: https://github.com/Transpiler-Mate/cwl2click/compare/v0.7.0...v0.8.0

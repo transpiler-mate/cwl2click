@@ -46,7 +46,7 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
 dependencies = [
-  "transpiler-mate-api==1.0.0",
+  "transpiler-mate-api>=1.0.0",
   "Jinja2==3.1.6",
   "loguru==0.7.3"
 ]
@@ -105,7 +105,7 @@ omit = [
 [tool.coverage.paths]
 cwl2click = [
   "src/cwl2click",
-  "*/{{ project_slug }}/src/cwl2click"
+  "*/cwl2click/src/cwl2click"
 ]
 
 [tool.coverage.report]

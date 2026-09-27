@@ -14,14 +14,28 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
-# API reference
+# Contributing to CodeMeta Transpiler-Mate Plugin
 
-::: cwl2click
+## Development setup
 
-## Plugin registration
+```bash
+hatch shell
+task
+```
 
-::: cwl2click.plugin.cwl2click
+## Quality gate
 
-## Options
+Before opening a pull request, run:
 
-::: cwl2click.plugin.Cwl2ClickOptions
+```bash
+task
+```
+
+## Documentation
+
+Documentation follows Diátaxis:
+
+- tutorials teach through guided learning;
+- how-to guides solve concrete tasks;
+- reference pages provide exact technical facts;
+- explanation pages discuss concepts and rationale.
