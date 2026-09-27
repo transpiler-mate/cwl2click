@@ -10,3 +10,4 @@ docs/api
 uv.lock
 .vscode
 .*_cache
+dist/
